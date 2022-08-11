@@ -1,0 +1,14 @@
+# This is a header
+# It can go across
+# Multiple lines
+test: hello
+test_key_two: hello there
+integers:
+  test_key_four: 1
+  test_cinco: 5
+  test_six: TEST_TWO
+test_with_weird_characters: 'Hello: This is a test with weird # characters!'
+snake_case_conversion_test1: Snake case conversion test!
+keyPath:
+  snakeCaseConversion:
+    testString: Snake case conversion test 2!

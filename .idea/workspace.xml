@@ -4,13 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Initial commit">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Fix key map flattening &amp; handle enums through names">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedYaml.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/RootedMap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleConfigYaml.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleRootedMapYaml.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleWithEmbeddedYaml.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/sample_config_yaml.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/sample_rooted_map_yaml.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/sample_with_embedded_yaml.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/sample_yaml.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/AnnotamlException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/AnnotamlException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/KeyPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/KeyPath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/TestYamlFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/TestYamlFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/TestYamlFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleYaml.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +46,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="AnnotationType" />
         <option value="Class" />
       </list>
     </option>
@@ -61,8 +73,8 @@
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.AnnotamlTests.testYamlDeSerialization">
-    <configuration name="AnnotamlTests.testYamlDeSerialization" type="GradleRunConfiguration" factoryName="Gradle">
+  <component name="RunManager">
+    <configuration name="AnnotamlTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -75,7 +87,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;net.william278.annotaml.AnnotamlTests.testYamlDeSerialization&quot;" />
+            <option value="&quot;net.william278.annotaml.AnnotamlTests&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -85,29 +97,11 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="AnnotamlTests.testYamlSerialization" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;net.william278.annotaml.AnnotamlTests.testYamlSerialization&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.AnnotamlTests" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -118,7 +112,7 @@
       <option name="presentableId" value="Default" />
       <updated>1660168490692</updated>
       <workItem from="1660168491934" duration="8252000" />
-      <workItem from="1660208830082" duration="3221000" />
+      <workItem from="1660208830082" duration="24868000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -127,7 +121,21 @@
       <option name="project" value="LOCAL" />
       <updated>1660179217409</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Create LICENSE and README">
+      <created>1660212160269</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1660212160269</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Fix key map flattening &amp; handle enums through names">
+      <created>1660212222285</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1660212222285</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,6 +154,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Create LICENSE and README" />
+    <MESSAGE value="Fix key map flattening &amp; handle enums through names" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix key map flattening &amp; handle enums through names" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="net.william278.annotaml.AnnotamlException" package="net.william278.annotaml" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

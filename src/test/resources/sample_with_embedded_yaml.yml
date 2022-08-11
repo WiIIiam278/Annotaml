@@ -1,0 +1,21 @@
+# Test for embedded objects in a yaml
+embedded_object:
+  aBoolean: true
+  aDouble: 0.0
+  aFloat: 1.0
+  aLong: 1
+  aString: aString
+  anInt: 1
+embedded_object_list:
+  - aBoolean: true
+    aDouble: 0.0
+    aFloat: 1.0
+    aLong: 1
+    aString: aString
+    anInt: 1
+  - aBoolean: true
+    aDouble: 0.0
+    aFloat: 1.0
+    aLong: 1
+    aString: aString
+    anInt: 1

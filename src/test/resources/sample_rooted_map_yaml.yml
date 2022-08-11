@@ -1,0 +1,3 @@
+# Test for @RootedMap annotation
+test2: hello there
+test: hello

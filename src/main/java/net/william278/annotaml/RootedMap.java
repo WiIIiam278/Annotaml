@@ -1,20 +1,15 @@
 package net.william278.annotaml;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Identifies a custom path in the YAML file that should be used for saving a field.
+ * Special annotation for identifying rooted maps; key-value pairs to be saved/read from the yaml file root
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
-public @interface KeyPath {
-
-    @NotNull
-    String value();
+public @interface RootedMap {
 
 }

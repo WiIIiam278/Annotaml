@@ -1,24 +1,44 @@
 package net.william278.annotaml;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.util.Objects;
+import java.util.Optional;
 
 public class AnnotamlTests {
 
-    private final File testFile = new File("./src/test/resources/test.yml");
-    private final File deserializeTestFile = new File("./src/test/resources/test_out.yml");
+    private final Object[] objects = new Object[]{new SampleYaml(), new SampleWithEmbeddedYaml(),
+            new SampleRootedMapYaml(), new SampleConfigYaml()};
 
+    // Iterates through test objects to test serialization
     @Test
-    public void testYamlSerialization() {
-        Annotaml<TestYamlFile> annotaml = new Annotaml<>(new TestYamlFile(), testFile);
-        annotaml.serializeYaml();
+    public void testObjectSerialization() {
+        for (final Object file : objects) {
+            Annotaml.save(file, new File(new File(System.getProperty("java.io.tmpdir")),
+                    Annotaml.convertToSnakeCase(file.getClass().getSimpleName()) + ".yml"));
+        }
     }
 
     @Test
-    public void testYamlDeSerialization() {
-        TestYamlFile testYamlFile = Annotaml.load(testFile, TestYamlFile.class);
-        new Annotaml<>(testYamlFile, deserializeTestFile).serializeYaml();
+    public void testObjectDeserialization() {
+        for (final Object file : objects) {
+            final String fileName = Annotaml.convertToSnakeCase(file.getClass().getSimpleName() + ".yml");
+            final Object loaded = Annotaml.load(Objects.requireNonNull(getClass()
+                    .getClassLoader().getResourceAsStream(fileName)), file.getClass());
+            Annotaml.save(loaded, new File(new File(System.getProperty("java.io.tmpdir")),
+                    Annotaml.convertToSnakeCase(file.getClass().getSimpleName()) + ".yml"));
+        }
+    }
+
+    @Test
+    public void testObjectVersioning() {
+        final Optional<Integer> versionNumber = Annotaml.getVersionNumber(Objects.requireNonNull(getClass().getClassLoader()
+                        .getResourceAsStream(Annotaml.convertToSnakeCase(SampleConfigYaml.class.getSimpleName() + ".yml"))),
+                SampleConfigYaml.class);
+        Assertions.assertTrue(versionNumber.isPresent());
+        Assertions.assertEquals(1, versionNumber.get().intValue());
     }
 
 }
