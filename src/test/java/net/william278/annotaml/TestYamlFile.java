@@ -1,6 +1,6 @@
 package net.william278.annotaml;
 
-@YamlFile/*(header = "This is a header\nIt can go across\nMultiple lines")*/
+@YamlFile(header = "This is a header\nIt can go across\nMultiple lines")
 public class TestYamlFile {
 
     public String test = "hello";
@@ -19,6 +19,8 @@ public class TestYamlFile {
 
     @KeyPath(path = "integers.test_six")
     public TestEnum test6 = TestEnum.TEST_TWO;
+
+    public String testWithWeirdCharacters = "Hello: This is a test with weird # characters!";
 
     public String snakeCaseConversionTest1 = "Snake case conversion test!";
 

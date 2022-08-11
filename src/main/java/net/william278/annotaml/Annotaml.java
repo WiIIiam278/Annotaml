@@ -10,6 +10,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Annotaml<T> {
 
@@ -28,7 +30,17 @@ public class Annotaml<T> {
         new Annotaml<T>(yamlObject, outputFile).serializeYaml();
     }
 
-    @SuppressWarnings("unchecked")
+    /**
+     * Loads a YAML file into an object
+     *
+     * @param file      The file to load
+     * @param classType The class to load the file into
+     * @param <T>       The type of the object to load into
+     * @return The object loaded from the file
+     * @throws AnnotamlException If there is an error loading the file
+     * @implNote The class to deserialize must be a {@code YamlFile} annotated object and have a zero-argument constructor
+     */
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public static <T> T load(@NotNull File file, @NotNull Class<T> classType) throws AnnotamlException {
         // Read the file as a string if it exits
         final Map<String, Object> nestedYamlMap;
@@ -43,21 +55,9 @@ public class Annotaml<T> {
             throw new AnnotamlException("Yaml file could not be read: " + file.getAbsolutePath());
         }
 
-        // Flatten nested maps
-        final Map<String, Object> yamlMap = new HashMap<>();
-        nestedYamlMap.forEach((key, value) -> {
-            if (value instanceof Map) {
-                final Map<String, Object> map = (Map<String, Object>) value;
-                map.forEach((mapKey, mapValue) -> {
-                    final StringJoiner path = new StringJoiner(".");
-                    path.add(key);
-                    path.add(mapKey);
-                    yamlMap.put(path.toString(), mapValue);
-                });
-            } else {
-                yamlMap.put(key, value);
-            }
-        });
+        // Flatten nested maps to period separated keys
+        final Map<String, Object> yamlMap = nestedYamlMap.entrySet().stream().flatMap(Annotaml::flatten)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         // Validate that the object type constructor with zero arguments
         final Optional<Constructor<?>> constructors = Arrays.stream(classType.getConstructors()).filter(
@@ -75,23 +75,38 @@ public class Annotaml<T> {
             final Field[] fields = classType.getDeclaredFields();
             for (Field field : fields) {
                 // Get the field name
-                final String fieldName = field.getName();
+                String fieldPath = field.getName();
 
-                // Match in camelCase and snake_case
-                final StringJoiner camelCase = new StringJoiner(".");
-                camelCase.add(fieldName);
-                final StringJoiner snakeCase = new StringJoiner(".");
-                snakeCase.add(fieldName.replaceAll(Pattern.quote("_"), ""));
+                // If the field is annotated with KeyPath, set field name to the path
+                if (field.isAnnotationPresent(KeyPath.class)) {
+                    final KeyPath keyPath = field.getAnnotation(KeyPath.class);
+                    fieldPath = keyPath.path();
+                }
 
-                // Get the value from the yaml map if valid
-                final Optional<Object> valueCamelCase = Optional.ofNullable(yamlMap.get(camelCase.toString()));
-                final Optional<Object> valueSnakeCase = Optional.ofNullable(yamlMap.get(snakeCase.toString()));
-                if (valueCamelCase.isPresent()) {
+                // Convert to snake case if necessary
+                if (!yamlMap.containsKey(fieldPath)) {
+                    fieldPath = convertToSnakeCase(fieldPath);
+                }
+
+                // Set the field value if present in the yaml map
+                System.out.println("Field path: " + fieldPath);
+                if (yamlMap.containsKey(fieldPath)) {
                     field.setAccessible(true);
-                    field.set(object, valueCamelCase.get());
-                } else if (valueSnakeCase.isPresent()) {
-                    field.setAccessible(true);
-                    field.set(object, valueSnakeCase.get());
+
+                    // If the field is an enum, set the value to the enum value; null if the value is invalid
+                    if (field.getType().isEnum()) {
+                        try {
+                            final Object enumString = yamlMap.get(fieldPath);
+                            final Enum<?> enumValue = Enum.valueOf((Class<Enum>) field.getType(), enumString.toString());
+                            field.set(object, enumValue);
+                        } catch (IllegalArgumentException e) {
+                            field.set(object, null);
+                        }
+                        continue;
+                    }
+
+                    // Otherwise, set the value to the field type
+                    field.set(object, yamlMap.get(fieldPath));
                 }
             }
 
@@ -148,16 +163,24 @@ public class Annotaml<T> {
 
                 // Determine the keyed path to use for the field
                 String fieldPath = field.getName();
+
+                // Convert field path names to snake case if necessary
+                if (convertToSnakeCase) {
+                    fieldPath = convertToSnakeCase(fieldPath);
+                }
+
+                // Or, if the field is annotated with KeyPath, use the annotated path
                 if (field.isAnnotationPresent(KeyPath.class)) {
                     fieldPath = field.getAnnotation(KeyPath.class).path();
                 }
 
-                // Convert field path names to snake case if necessary
-                if (convertToSnakeCase) {
-                    fieldPath = fieldPath.replaceAll("(.)(\\p{Upper})", "$1_$2").toLowerCase();
+                // If the field is an enum, use the enum name
+                Object fieldValue = field.get(object);
+                if (field.getType().isEnum()) {
+                    fieldValue = ((Enum<?>) field.get(object)).name();
                 }
 
-                // If the field path name is period-separated, convert it to a nested map and add, otherwise add directly
+                // If the field path name is period-separated, convert it to a nested map first, otherwise add directly
                 if (fieldPath.contains(".")) {
                     final String[] fieldPathParts = fieldPath.split("\\.");
                     Map<String, Object> currentMap = keyValueMap;
@@ -167,9 +190,9 @@ public class Annotaml<T> {
                         }
                         currentMap = (Map<String, Object>) currentMap.get(fieldPathParts[i]);
                     }
-                    currentMap.put(fieldPathParts[fieldPathParts.length - 1], field.get(object));
+                    currentMap.put(fieldPathParts[fieldPathParts.length - 1], fieldValue);
                 } else {
-                    keyValueMap.put(fieldPath, field.get(object));
+                    keyValueMap.put(fieldPath, fieldValue);
                 }
             } catch (IllegalAccessException e) {
                 throw new AnnotamlException("Cannot access field " + field.getName());
@@ -203,6 +226,29 @@ public class Annotaml<T> {
         options.setDefaultScalarStyle(DumperOptions.ScalarStyle.PLAIN);
         options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
         return new Yaml(options);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static Stream<Map.Entry<String, Object>> flatten(Map.Entry<String, Object> entry) {
+        if (entry.getValue() instanceof Map<?, ?>) {
+            Map<String, Object> nested = (Map<String, Object>) entry.getValue();
+
+            return nested.entrySet().stream()
+                    .map(e -> new AbstractMap.SimpleEntry<>(entry.getKey() + "." + e.getKey(), e.getValue()))
+                    .flatMap(Annotaml::flatten);
+        }
+        return Stream.of(entry);
+    }
+
+    /**
+     * Converts a string to snake_case
+     *
+     * @param value the string to convert
+     * @return the converted string
+     */
+    @NotNull
+    private static String convertToSnakeCase(@NotNull String value) {
+        return value.replaceAll("(.)(\\p{Upper})", "$1_$2").toLowerCase();
     }
 
 }

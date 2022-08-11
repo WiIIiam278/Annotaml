@@ -17,8 +17,8 @@ public class AnnotamlTests {
 
     @Test
     public void testYamlDeSerialization() {
-        Annotaml<TestYamlFile> annotaml = new Annotaml<>(Annotaml.load(testFile, TestYamlFile.class), deserializeTestFile);
-        annotaml.serializeYaml();
+        TestYamlFile testYamlFile = Annotaml.load(testFile, TestYamlFile.class);
+        new Annotaml<>(testYamlFile, deserializeTestFile).serializeYaml();
     }
 
 }
