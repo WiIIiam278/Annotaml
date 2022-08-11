@@ -104,14 +104,13 @@ public class Annotaml<T> {
     }
 
     /**
-     * Loads a YAML file into an object
+     * Loads a YAML file into an object. The class to deserialize must be a {@code YamlFile} annotated object and have a zero-argument constructor
      *
      * @param file      The file to load
      * @param classType The class to load the file into
      * @param <T>       The type of the object to load into
      * @return The object loaded from the file
      * @throws AnnotamlException If there is an error loading the file
-     * @implNote The class to deserialize must be a {@code YamlFile} annotated object and have a zero-argument constructor
      */
     public static <T> T load(@NotNull File file, @NotNull Class<T> classType) throws AnnotamlException {
         try (final InputStream inputStream = new FileInputStream(file)) {
@@ -124,14 +123,13 @@ public class Annotaml<T> {
     }
 
     /**
-     * Loads a YAML file into an object
+     * Loads a YAML file into an object. The class to deserialize must be a {@code YamlFile} annotated object and have a zero-argument constructor
      *
      * @param inputStream InputStream of the file to load
      * @param classType   The class to load the file into
      * @param <T>         The type of the object to load into
      * @return The object loaded from the file
      * @throws AnnotamlException If there is an error loading the file
-     * @implNote The class to deserialize must be a {@code YamlFile} annotated object and have a zero-argument constructor
      */
     @SuppressWarnings("unchecked")
     public static <T> T load(@NotNull InputStream inputStream, @NotNull Class<T> classType) throws AnnotamlException {

@@ -1,5 +1,7 @@
 plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
     id 'java'
+    id 'maven-publish'
 }
 
 group 'net.william278'
@@ -15,6 +17,30 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+shadowJar {
+    relocate 'org.yaml', 'net.william278.annotaml.libraries'
+}
+
+jar {
+    dependsOn shadowJar
+}
+
+publishing {
+    publications {
+        shadow(MavenPublication) { publication ->
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
 }
 
 test {

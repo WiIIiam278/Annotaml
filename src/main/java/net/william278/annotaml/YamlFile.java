@@ -8,10 +8,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Identifies a file that can be saved and loaded from a YAML file.
+ * Identifies a file that can be saved and loaded from a YAML file. Requires a constructor with no arguments present.
  * <p>
  * Not to be confused with {@link EmbeddedYaml}, which specifies custom types that can be embedded within this file.
- * @implNote Requires a constructor with no arguments present.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
@@ -47,13 +46,11 @@ public @interface YamlFile {
     String versionField() default "";
 
     /**
-     * The current version number of the file
+     * The current version number of the file. This will be written to the config to the field specified by {@link #versionField()}. If {@link #versionField()} is {@code ""}, this will be omitted from the config.
      * <p>
      * Default: {@code 1}
      *
      * @return The current version number of the file
-     * @implNote This will be written to the config to the field specified by {@link #versionField()}.
-     * <p>If {@link #versionField()} is {@code ""}, this will be omitted from the config.
      */
     int versionNumber() default 1;
 

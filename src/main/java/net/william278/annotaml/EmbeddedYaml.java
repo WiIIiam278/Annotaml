@@ -9,8 +9,8 @@ import java.lang.annotation.Target;
  * Identifies a type that can be serialized into an object within a YAML file
  * <p>
  * Not to be confused with {@link YamlFile}, which specifies custom types that can be embedded within this file.
- *
- * @implNote Requires a constructor with no arguments present.
+ * <p>
+ * Requires a constructor with no arguments present.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
