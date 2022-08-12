@@ -3,6 +3,8 @@ package net.william278.annotaml;
 import org.jetbrains.annotations.NotNull;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.introspector.Property;
+import org.yaml.snakeyaml.nodes.MappingNode;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
@@ -170,11 +172,28 @@ public class Annotaml<T> {
                     fieldPath = convertToSnakeCase(fieldPath);
                 }
 
+                // If the field contains an embedded object, read it from the child nodes
+                if (field.getType().isAnnotationPresent(EmbeddedYaml.class)) {
+                    field.set(object, readEmbeddedObject(field.getType(), fieldPath, object, yamlMap));
+                    continue;
+                }
+
+                // If the field contains a list of embedded objects
+                if (List.class.equals(field.getType()) && field.isAnnotationPresent(EmbeddedListType.class)) {
+                    final Class<?> listType = field.getAnnotation(EmbeddedListType.class).value();
+                    final List<Object> readList = new ArrayList<>();
+                    for (final Object listItem : (List<?>) yamlMap.get(fieldPath)) {
+                        final Map<String, Object> itemValues = ((Map<String, Object>) listItem)
+                                .entrySet().stream().flatMap(Annotaml::flatten)
+                                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                        readList.add(readEmbeddedObject(listType, fieldPath, listItem, itemValues));
+                    }
+                    field.set(object, readList);
+                    continue;
+                }
+
                 // Set the field value if present in the yaml map
                 if (yamlMap.containsKey(fieldPath)) {
-                    field.setAccessible(true);
-
-                    // Otherwise, set the value to the field type
                     getSettableValue(field, yamlMap.get(fieldPath)).ifPresent(settable -> {
                         try {
                             field.set(object, settable);
@@ -191,6 +210,51 @@ public class Annotaml<T> {
             return object;
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             throw new AnnotamlException("Error instantiating class: " + classType.getName());
+        }
+    }
+
+    private static <T> Object readEmbeddedObject(@NotNull Class<T> classType, @NotNull String fieldPath, @NotNull Object object,
+                                                 @NotNull Map<String, Object> values) throws AnnotamlException {
+        try {
+            // Instantiate a new object of the embedded type
+            final Constructor<?> embeddedConstructor = classType.getConstructor();
+            final Object embeddedObject = embeddedConstructor.newInstance();
+
+            // Iterate through embedded fields
+            for (final Field embeddedField : embeddedObject.getClass().getDeclaredFields()) {
+                // Get the field name
+                String embeddedFieldPath = embeddedField.getName();
+
+                // If the field is annotated with KeyPath, set field name to the path
+                if (embeddedField.isAnnotationPresent(KeyPath.class)) {
+                    final KeyPath keyPath = embeddedField.getAnnotation(KeyPath.class);
+                    embeddedFieldPath = keyPath.value();
+                }
+
+                // Convert to snake case if necessary
+                if (!values.containsKey(embeddedFieldPath)) {
+                    embeddedFieldPath = convertToSnakeCase(embeddedFieldPath);
+                }
+
+                // Set the value of the embedded field
+                if (values.containsKey(embeddedFieldPath)) {
+                    final Object value = values.get(embeddedFieldPath);
+                    embeddedField.setAccessible(true);
+
+                    getSettableValue(embeddedField, value).ifPresent(settable -> {
+                        try {
+                            embeddedField.set(embeddedObject, settable);
+                        } catch (IllegalAccessException e) {
+                            throw new AnnotamlException("Error setting field value: " + classType.getName());
+                        }
+                    });
+                }
+            }
+
+            return embeddedObject;
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException |
+                 InstantiationException e) {
+            throw new AnnotamlException("Error instantiating embedded object: " + classType.getName());
         }
     }
 
@@ -289,7 +353,7 @@ public class Annotaml<T> {
         final Map<String, Object> nestedYamlMap;
         nestedYamlMap = getYaml(getEmbeddedClassTypes(classType)).load(inputStream);
         if (Objects.isNull(nestedYamlMap)) {
-            throw new AnnotamlException("Failed ot read YAML file");
+            throw new AnnotamlException("Failed to read YAML file");
         }
 
         // Flatten nested maps to period separated keys
@@ -320,11 +384,6 @@ public class Annotaml<T> {
         if (!file.getParentFile().exists()) {
             if (!file.getParentFile().mkdirs()) {
                 throw new AnnotamlException("Could not create output directory");
-            }
-        }
-        if (file.exists()) {
-            if (!file.delete()) {
-                throw new AnnotamlException("Could not delete existing output file in order to overwrite");
             }
         }
 
@@ -384,8 +443,9 @@ public class Annotaml<T> {
                 if (field.getType().isEnum()) {
                     fieldValue = ((Enum<?>) field.get(object)).name();
                 }
+
+                // If the field is an array of enums, use the enum names
                 if (field.getType().isArray()) {
-                    // If the field is an array of enums, use the enum names
                     if (field.getType().getComponentType().isEnum()) {
                         fieldValue = Arrays.stream((Object[]) field.get(object)).map(value -> ((Enum<?>) value).name()).collect(Collectors.toList());
                     }
@@ -463,12 +523,16 @@ public class Annotaml<T> {
         options.setPrettyFlow(true);
         options.setDefaultScalarStyle(DumperOptions.ScalarStyle.PLAIN);
 
-        final Representer representer = new Representer();
-        for (Class<?> classType : extraClasses) {
-            representer.addClassTag(classType, Tag.MAP);
-        }
+        return new Yaml(new Representer() { //todo reimplement, use reflection for list-of-object handling
+            @Override
+            protected MappingNode representJavaBean(Set<Property> properties, Object javaBean) {
+                if (!classTags.containsKey(javaBean.getClass())) {
+                    addClassTag(javaBean.getClass(), Tag.MAP);
+                }
 
-        return new Yaml(representer, options);
+                return super.representJavaBean(properties, javaBean);
+            }
+        }, options);
     }
 
     /**
@@ -509,6 +573,11 @@ public class Annotaml<T> {
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
     private static Optional<Object> getSettableValue(@NotNull Field field, @NotNull Object value) {
+        // Handle if directly settable
+        if (field.getType().isAssignableFrom(value.getClass())) {
+            return Optional.of(value);
+        }
+
         // Handle enums
         if (field.getType().isEnum()) {
             try {
@@ -555,9 +624,6 @@ public class Annotaml<T> {
      * @return the object parsed to be settable if possible; empty otherwise
      */
     private static Optional<Object> parseObjectType(@NotNull Field field, @NotNull Object value) {
-        if (field.getType().isAssignableFrom(value.getClass())) {
-            return Optional.of(value);
-        }
         if (boolean.class.equals(field.getType())) {
             return Optional.of(Boolean.parseBoolean(value.toString()));
         }

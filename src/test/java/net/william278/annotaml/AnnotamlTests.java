@@ -41,4 +41,32 @@ public class AnnotamlTests {
         Assertions.assertEquals(1, versionNumber.get().intValue());
     }
 
+    @Test
+    public void testUpdating() {
+        Annotaml.reload(new File("./src/test/resources/embedded_object_reading_test.yml"), new SampleWithEmbeddedYaml(),
+                Annotaml.LoaderOptions.builder().copyDefaults(true));
+    }
+
+    @Test
+    public void testWrite() {
+        Annotaml.save(new SampleWithEmbeddedYaml(),
+                new File("./src/test/resources/embedded_object_reading_test.yml"));
+    }
+
+    @Test
+    public void testLoadingEmbeddedYamlObjects() {
+        SampleWithEmbeddedYaml embeddedYamlObject = Annotaml.load(
+                Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(
+                        "embedded_object_reading_test.yml")), SampleWithEmbeddedYaml.class);
+        Assertions.assertNotNull(embeddedYamlObject);
+        Assertions.assertNotNull(embeddedYamlObject.embeddedObject);
+        Assertions.assertNotNull(embeddedYamlObject.embeddedObjectList);
+        //Assertions.assertNotNull(embeddedYamlObject.embeddedObjectMap); todo fix this
+
+        for (final SampleWithEmbeddedYaml.SampleEmbeddedObject sampleEmbeddedObject : embeddedYamlObject.embeddedObjectList) {
+            Assertions.assertEquals(1, sampleEmbeddedObject.anInt);
+            Assertions.assertEquals("aString", sampleEmbeddedObject.aString);
+        }
+    }
+
 }

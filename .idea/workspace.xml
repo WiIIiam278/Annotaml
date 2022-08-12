@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Object versioning, fixes to array casting, embedded objects, rooted maps &amp; tests">
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Adjust gradle build script">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedListType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/embedded_object_reading_test.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedYaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedYaml.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleWithEmbeddedYaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleWithEmbeddedYaml.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +45,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="AnnotationType" />
         <option value="Class" />
+        <option value="AnnotationType" />
       </list>
     </option>
   </component>
@@ -65,13 +66,19 @@
   "keyToString": {
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/William/IdeaProjects/Annotaml/src/test/resources",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.Annotaml build">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\William\IdeaProjects\Annotaml\src\test\resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.AnnotamlTests.testLoadingEmbeddedYamlObjects">
     <configuration name="Annotaml build" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -117,12 +124,112 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="AnnotamlTests.testLoading" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;net.william278.annotaml.AnnotamlTests.testLoading&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="AnnotamlTests.testLoadingEmbeddedYamlObjects" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;net.william278.annotaml.AnnotamlTests.testLoadingEmbeddedYamlObjects&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="AnnotamlTests.testUpdating" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;net.william278.annotaml.AnnotamlTests.testUpdating&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="AnnotamlTests.testWrite" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;net.william278.annotaml.AnnotamlTests.testWrite&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Gradle.Annotaml build" />
+      <item itemvalue="Gradle.AnnotamlTests.testLoading" />
+      <item itemvalue="Gradle.AnnotamlTests.testLoadingEmbeddedYamlObjects" />
+      <item itemvalue="Gradle.AnnotamlTests.testUpdating" />
+      <item itemvalue="Gradle.AnnotamlTests.testWrite" />
       <item itemvalue="Gradle.AnnotamlTests" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.AnnotamlTests.testLoadingEmbeddedYamlObjects" />
+        <item itemvalue="Gradle.AnnotamlTests.testLoading" />
+        <item itemvalue="Gradle.AnnotamlTests.testWrite" />
+        <item itemvalue="Gradle.AnnotamlTests.testUpdating" />
         <item itemvalue="Gradle.AnnotamlTests" />
       </list>
     </recent_temporary>
@@ -136,7 +243,7 @@
       <option name="presentableId" value="Default" />
       <updated>1660168490692</updated>
       <workItem from="1660168491934" duration="8252000" />
-      <workItem from="1660208830082" duration="26146000" />
+      <workItem from="1660208830082" duration="38155000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -166,7 +273,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660244184040</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Adjust gradle build script">
+      <created>1660245346020</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1660245346020</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,7 +302,8 @@
     <MESSAGE value="Create LICENSE and README" />
     <MESSAGE value="Fix key map flattening &amp; handle enums through names" />
     <MESSAGE value="Object versioning, fixes to array casting, embedded objects, rooted maps &amp; tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="Object versioning, fixes to array casting, embedded objects, rooted maps &amp; tests" />
+    <MESSAGE value="Adjust gradle build script" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adjust gradle build script" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
