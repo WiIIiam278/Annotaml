@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Fix custom objects, add EmbeddedListType specification">
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Fix embedded object map loading">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedListType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedCollection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedYaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedYaml.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleWithEmbeddedYaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleWithEmbeddedYaml.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/embedded_object_reading_test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/embedded_object_reading_test.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +45,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="AnnotationType" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -226,8 +227,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.AnnotamlTests.testLoadingEmbeddedYamlObjects" />
-        <item itemvalue="Gradle.AnnotamlTests.testLoading" />
         <item itemvalue="Gradle.AnnotamlTests.testWrite" />
+        <item itemvalue="Gradle.AnnotamlTests.testLoading" />
         <item itemvalue="Gradle.AnnotamlTests.testUpdating" />
         <item itemvalue="Gradle.AnnotamlTests" />
       </list>
@@ -244,7 +245,7 @@
       <workItem from="1660168491934" duration="8252000" />
       <workItem from="1660208830082" duration="38196000" />
       <workItem from="1660296373435" duration="2451000" />
-      <workItem from="1660388886122" duration="1079000" />
+      <workItem from="1660388886122" duration="9589000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -288,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660264256067</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fix embedded object map loading">
+      <created>1660390045944</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1660390045944</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,7 +320,8 @@
     <MESSAGE value="Object versioning, fixes to array casting, embedded objects, rooted maps &amp; tests" />
     <MESSAGE value="Adjust gradle build script" />
     <MESSAGE value="Fix custom objects, add EmbeddedListType specification" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix custom objects, add EmbeddedListType specification" />
+    <MESSAGE value="Fix embedded object map loading" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix embedded object map loading" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

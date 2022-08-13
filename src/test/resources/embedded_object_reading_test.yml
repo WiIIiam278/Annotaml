@@ -4,33 +4,28 @@ embedded_object:
   aDouble: 0.0
   aFloat: 1.0
   aLong: 1
-  aString: aString
   anInt: 1
 embedded_object_list:
   - aBoolean: true
     aDouble: 0.0
     aFloat: 1.0
     aLong: 1
-    aString: aString
     anInt: 1
   - aBoolean: true
     aDouble: 0.0
     aFloat: 1.0
     aLong: 1
-    aString: aString
     anInt: 1
 embedded_object_map:
-  key2:
-    aBoolean: true
-    aDouble: 0.0
-    aFloat: 1.0
-    aLong: 1
-    aString: aString
-    anInt: 1
   key1:
     aBoolean: true
     aDouble: 0.0
     aFloat: 1.0
     aLong: 1
-    aString: aString
+    anInt: 1
+  key2:
+    aBoolean: true
+    aDouble: 0.0
+    aFloat: 1.0
+    aLong: 1
     anInt: 1

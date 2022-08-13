@@ -22,6 +22,7 @@ public class SampleWithEmbeddedYaml {
     public static class SampleEmbeddedObject {
 
         public int anInt = 1;
+        @IgnoredKey
         public String aString = "aString";
         public boolean aBoolean = true;
         public double aDouble = 0.0d;

@@ -2,9 +2,8 @@ package net.william278.annotaml;
 
 import org.jetbrains.annotations.NotNull;
 import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.TypeDescription;
 import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.introspector.Property;
-import org.yaml.snakeyaml.nodes.MappingNode;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
@@ -216,7 +215,10 @@ public class Annotaml<T> {
                 }
 
                 // Set the field value if present in the yaml map
-                if (yamlMap.containsKey(fieldPath)) {
+                if (yamlMap.containsKey(fieldPath)
+                    && yamlMap.get(fieldPath) != null
+                    && !field.isAnnotationPresent(IgnoredKey.class)) {
+
                     getSettableValue(field, yamlMap.get(fieldPath)).ifPresent(settable -> {
                         try {
                             field.set(object, settable);
@@ -226,7 +228,9 @@ public class Annotaml<T> {
                     });
                 } else {
                     // Set the field value to null (uninitialized)
-                    field.set(object, null);
+                    if (!field.getType().isPrimitive()) {
+                        field.set(object, null);
+                    }
                 }
             }
 
@@ -254,14 +258,17 @@ public class Annotaml<T> {
             final Object embeddedObject = embeddedConstructor.newInstance();
 
             // Iterate through embedded fields
-            for (final Field embeddedField : embeddedObject.getClass().getDeclaredFields()) {
+            Arrays.stream(embeddedObject.getClass().getDeclaredFields()).forEach(embeddedField -> {
                 // Get the field name
                 String embeddedFieldPath = getKeyedFieldName(embeddedField, values);
 
                 // Set the value of the embedded field
-                if (values.containsKey(embeddedFieldPath)) {
+                embeddedField.setAccessible(true);
+                if (values.containsKey(embeddedFieldPath)
+                    && values.get(embeddedFieldPath) != null
+                    && !embeddedField.isAnnotationPresent(IgnoredKey.class)) {
+
                     final Object value = values.get(embeddedFieldPath);
-                    embeddedField.setAccessible(true);
 
                     getSettableValue(embeddedField, value).ifPresent(settable -> {
                         try {
@@ -270,8 +277,16 @@ public class Annotaml<T> {
                             throw new AnnotamlException("Error setting field value: " + classType.getName());
                         }
                     });
+                } else {
+                    try {
+                        if (!embeddedField.getType().isPrimitive()) {
+                            embeddedField.set(embeddedObject, null);
+                        }
+                    } catch (IllegalAccessException e) {
+                        throw new AnnotamlException("Error setting unset or ignored field value to null: " + classType.getName());
+                    }
                 }
-            }
+            });
 
             return embeddedObject;
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException |
@@ -570,16 +585,20 @@ public class Annotaml<T> {
         options.setPrettyFlow(true);
         options.setDefaultScalarStyle(DumperOptions.ScalarStyle.PLAIN);
 
-        return new Yaml(new Representer() {
-            @Override
-            protected MappingNode representJavaBean(Set<Property> properties, Object javaBean) {
-                if (!classTags.containsKey(javaBean.getClass())) {
-                    addClassTag(javaBean.getClass(), Tag.MAP);
-                }
+        final Representer representer = new Representer();
+        Arrays.stream(extraClasses).forEach(extraClass -> {
+            // Add class tag
+            representer.addClassTag(extraClass, Tag.MAP);
 
-                return super.representJavaBean(properties, javaBean);
-            }
-        }, options);
+            // Add type description
+            final TypeDescription typeDescription = new TypeDescription(extraClass);
+            typeDescription.setExcludes(Arrays.stream(extraClass.getDeclaredFields())
+                    .filter(field -> field.isAnnotationPresent(IgnoredKey.class))
+                    .map(Field::getName).collect(Collectors.toList()).toArray(String[]::new));
+            representer.addTypeDescription(typeDescription);
+        });
+
+        return new Yaml(representer, options);
     }
 
     /**
