@@ -6,14 +6,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Indicates a key contains embedded list values.
+ * Indicates a key contains embedded {@code Map} or {@code List} values.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
-public @interface EmbeddedListType {
+public @interface EmbeddedCollection {
 
     /**
      * The type of the list.
+     *
      * @return The type of the list.
      */
     Class<?> value();

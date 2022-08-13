@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Adjust gradle build script">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedListType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/embedded_object_reading_test.yml" afterDir="false" />
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Fix custom objects, add EmbeddedListType specification">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedListType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedCollection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleWithEmbeddedYaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleWithEmbeddedYaml.java" afterDir="false" />
     </list>
@@ -62,17 +61,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/William/IdeaProjects/Annotaml/src/test/resources",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/William/IdeaProjects/Annotaml/src/test/resources&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\William\IdeaProjects\Annotaml\src\test\resources" />
@@ -243,7 +242,9 @@
       <option name="presentableId" value="Default" />
       <updated>1660168490692</updated>
       <workItem from="1660168491934" duration="8252000" />
-      <workItem from="1660208830082" duration="38155000" />
+      <workItem from="1660208830082" duration="38196000" />
+      <workItem from="1660296373435" duration="2451000" />
+      <workItem from="1660388886122" duration="1079000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -280,7 +281,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660245346020</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fix custom objects, add EmbeddedListType specification">
+      <created>1660264256067</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1660264256067</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,7 +311,8 @@
     <MESSAGE value="Fix key map flattening &amp; handle enums through names" />
     <MESSAGE value="Object versioning, fixes to array casting, embedded objects, rooted maps &amp; tests" />
     <MESSAGE value="Adjust gradle build script" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adjust gradle build script" />
+    <MESSAGE value="Fix custom objects, add EmbeddedListType specification" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix custom objects, add EmbeddedListType specification" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -61,7 +61,7 @@ public class AnnotamlTests {
         Assertions.assertNotNull(embeddedYamlObject);
         Assertions.assertNotNull(embeddedYamlObject.embeddedObject);
         Assertions.assertNotNull(embeddedYamlObject.embeddedObjectList);
-        //Assertions.assertNotNull(embeddedYamlObject.embeddedObjectMap); todo fix this
+        Assertions.assertNotNull(embeddedYamlObject.embeddedObjectMap);
 
         for (final SampleWithEmbeddedYaml.SampleEmbeddedObject sampleEmbeddedObject : embeddedYamlObject.embeddedObjectList) {
             Assertions.assertEquals(1, sampleEmbeddedObject.anInt);

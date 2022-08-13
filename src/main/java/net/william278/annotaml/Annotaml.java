@@ -159,37 +159,60 @@ public class Annotaml<T> {
             final Field[] fields = classType.getDeclaredFields();
             for (final Field field : fields) {
                 // Get the field name
-                String fieldPath = field.getName();
-
-                // If the field is annotated with KeyPath, set field name to the path
-                if (field.isAnnotationPresent(KeyPath.class)) {
-                    final KeyPath keyPath = field.getAnnotation(KeyPath.class);
-                    fieldPath = keyPath.value();
-                }
-
-                // Convert to snake case if necessary
-                if (!yamlMap.containsKey(fieldPath)) {
-                    fieldPath = convertToSnakeCase(fieldPath);
-                }
+                String fieldPath = getKeyedFieldName(field, yamlMap);
 
                 // If the field contains an embedded object, read it from the child nodes
                 if (field.getType().isAnnotationPresent(EmbeddedYaml.class)) {
-                    field.set(object, readEmbeddedObject(field.getType(), fieldPath, object, yamlMap));
+                    field.set(object, readEmbeddedObject(field.getType(), yamlMap));
                     continue;
                 }
 
-                // If the field contains a list of embedded objects
-                if (List.class.equals(field.getType()) && field.isAnnotationPresent(EmbeddedListType.class)) {
-                    final Class<?> listType = field.getAnnotation(EmbeddedListType.class).value();
-                    final List<Object> readList = new ArrayList<>();
-                    for (final Object listItem : (List<?>) yamlMap.get(fieldPath)) {
-                        final Map<String, Object> itemValues = ((Map<String, Object>) listItem)
-                                .entrySet().stream().flatMap(Annotaml::flatten)
-                                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-                        readList.add(readEmbeddedObject(listType, fieldPath, listItem, itemValues));
+                // If the field contains a collection of embedded objects
+                if (field.isAnnotationPresent(EmbeddedCollection.class)) {
+                    if (List.class.equals(field.getType())) {
+                        final Class<?> listType = field.getAnnotation(EmbeddedCollection.class).value();
+                        final List<Object> readList = new ArrayList<>();
+                        for (final Object listItem : (List<?>) yamlMap.get(fieldPath)) {
+                            final Map<String, Object> itemValues = ((Map<String, Object>) listItem)
+                                    .entrySet().stream().flatMap(Annotaml::flatten)
+                                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                            readList.add(readEmbeddedObject(listType, itemValues));
+                        }
+                        field.set(object, readList);
+                        continue;
                     }
-                    field.set(object, readList);
-                    continue;
+
+                    // If the field contains a map of embedded objects
+                    if (Map.class.equals(field.getType()) && field.isAnnotationPresent(EmbeddedCollection.class)) {
+                        final Class<?> mapType = field.getAnnotation(EmbeddedCollection.class).value();
+
+                        // Get all the keys that start with the field path and remove the field path
+                        final Set<String> fieldPathKeys = yamlMap.keySet().stream().filter(key -> key.startsWith(fieldPath))
+                                .map(key -> key.substring(fieldPath.length() + 1)).collect(Collectors.toSet());
+                        final Map<String, Object> embeddedObjectKeys = new LinkedHashMap<>();
+                        fieldPathKeys.forEach(key -> {
+                            final String mapKey = key.split("\\.")[0];
+                            final Object mapObject = yamlMap.get(fieldPath + "." + key);
+                            if (!embeddedObjectKeys.containsKey(mapKey)) {
+                                embeddedObjectKeys.put(mapKey, new LinkedHashMap<>());
+                            }
+                            ((Map<String, Object>) embeddedObjectKeys.get(mapKey)).put(key.split("\\.")[1], mapObject);
+                        });
+
+                        // Iterate through unread values and read each value as an embedded object then add to the map
+                        final Map<String, Object> readMap = new LinkedHashMap<>();
+                        embeddedObjectKeys.forEach((key, value) -> {
+                            final Map<String, Object> itemValues = ((Map<String, Object>) value)
+                                    .entrySet().stream().flatMap(Annotaml::flatten)
+                                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                            readMap.put(key, readEmbeddedObject(mapType, itemValues));
+                        });
+
+                        field.set(object, readMap);
+                        continue;
+                    }
+
+                    throw new AnnotamlException("@EmbeddedCollection field must be a List or Map: " + field.getType().getName());
                 }
 
                 // Set the field value if present in the yaml map
@@ -213,8 +236,18 @@ public class Annotaml<T> {
         }
     }
 
-    private static <T> Object readEmbeddedObject(@NotNull Class<T> classType, @NotNull String fieldPath, @NotNull Object object,
-                                                 @NotNull Map<String, Object> values) throws AnnotamlException {
+    /**
+     * Reads an embedded object from a YAML map
+     * <p>
+     * The object type must be annotated with {@code EmbeddedYaml} and have a zero-argument constructor
+     *
+     * @param classType The class to read the object into
+     * @param values    The values to instantiate the object with from the map
+     * @param <T>       The type of the object to create from the map
+     * @return A new object instantiated and set from the map of values
+     * @throws AnnotamlException If there is an error reading the embedded object
+     */
+    private static <T> Object readEmbeddedObject(@NotNull Class<T> classType, @NotNull Map<String, Object> values) throws AnnotamlException {
         try {
             // Instantiate a new object of the embedded type
             final Constructor<?> embeddedConstructor = classType.getConstructor();
@@ -223,18 +256,7 @@ public class Annotaml<T> {
             // Iterate through embedded fields
             for (final Field embeddedField : embeddedObject.getClass().getDeclaredFields()) {
                 // Get the field name
-                String embeddedFieldPath = embeddedField.getName();
-
-                // If the field is annotated with KeyPath, set field name to the path
-                if (embeddedField.isAnnotationPresent(KeyPath.class)) {
-                    final KeyPath keyPath = embeddedField.getAnnotation(KeyPath.class);
-                    embeddedFieldPath = keyPath.value();
-                }
-
-                // Convert to snake case if necessary
-                if (!values.containsKey(embeddedFieldPath)) {
-                    embeddedFieldPath = convertToSnakeCase(embeddedFieldPath);
-                }
+                String embeddedFieldPath = getKeyedFieldName(embeddedField, values);
 
                 // Set the value of the embedded field
                 if (values.containsKey(embeddedFieldPath)) {
@@ -256,6 +278,31 @@ public class Annotaml<T> {
                  InstantiationException e) {
             throw new AnnotamlException("Error instantiating embedded object: " + classType.getName());
         }
+    }
+
+    /**
+     * Returns the name of a field as formatted in a key of mapped yaml
+     *
+     * @param field  The field to get the name of
+     * @param values The yaml map to determine the name with
+     * @return The name of the field
+     */
+    @NotNull
+    private static String getKeyedFieldName(@NotNull Field field, @NotNull Map<String, Object> values) {
+        String fieldName = field.getName();
+
+        // If the field is annotated with KeyPath, set field name to the path
+        if (field.isAnnotationPresent(KeyPath.class)) {
+            final KeyPath keyPath = field.getAnnotation(KeyPath.class);
+            fieldName = keyPath.value();
+        }
+
+        // Convert to snake case if necessary
+        if (!values.containsKey(fieldName)) {
+            fieldName = convertToSnakeCase(fieldName);
+        }
+
+        return fieldName;
     }
 
     /**
@@ -523,7 +570,7 @@ public class Annotaml<T> {
         options.setPrettyFlow(true);
         options.setDefaultScalarStyle(DumperOptions.ScalarStyle.PLAIN);
 
-        return new Yaml(new Representer() { //todo reimplement, use reflection for list-of-object handling
+        return new Yaml(new Representer() {
             @Override
             protected MappingNode representJavaBean(Set<Property> properties, Object javaBean) {
                 if (!classTags.containsKey(javaBean.getClass())) {
