@@ -1,0 +1,5 @@
+# This file ensures jitpack builds Annotaml with Java 11
+jdk:
+  - 'openjdk11'
+install:
+  - './gradlew clean publish'
