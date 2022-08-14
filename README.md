@@ -9,7 +9,7 @@ Annotate a configuration object to your liking and load/reload it to/from a YAML
 Requires Java 11+.
 
 ## Installation
-Annotaml is available on JitPack.
+Annotaml is available on JitPack. You can browse the Javadocs [here](https://javadoc.jitpack.io/net/william278/Annotaml/latest/javadoc).
 
 ### Maven
 To use the library on Maven, in your `pom.xml` file, first add the JitPack repository:
@@ -93,6 +93,8 @@ public class ConfigLoader() {
     
 }
 ```
+
+[Browse the Javadocs](https://javadoc.jitpack.io/net/william278/Annotaml/latest/javadoc) for more methods and information.
 
 ## License
 Annotaml is licensed under Apache-2.0.
