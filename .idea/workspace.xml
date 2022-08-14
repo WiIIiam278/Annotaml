@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Type descriptions, ignore reading keys annoted as ignored, set values to null if not present">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Support reloading defaults from an InputStream">
       <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -242,7 +241,7 @@
       <workItem from="1660208830082" duration="38196000" />
       <workItem from="1660296373435" duration="2451000" />
       <workItem from="1660388886122" duration="10463000" />
-      <workItem from="1660484898411" duration="394000" />
+      <workItem from="1660484898411" duration="685000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -300,7 +299,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660408240498</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Support reloading defaults from an InputStream">
+      <created>1660485515010</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1660485515010</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,7 +332,8 @@
     <MESSAGE value="Fix custom objects, add EmbeddedListType specification" />
     <MESSAGE value="Fix embedded object map loading" />
     <MESSAGE value="Type descriptions, ignore reading keys annoted as ignored, set values to null if not present" />
-    <option name="LAST_COMMIT_MESSAGE" value="Type descriptions, ignore reading keys annoted as ignored, set values to null if not present" />
+    <MESSAGE value="Support reloading defaults from an InputStream" />
+    <option name="LAST_COMMIT_MESSAGE" value="Support reloading defaults from an InputStream" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

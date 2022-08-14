@@ -409,8 +409,13 @@ public class Annotaml<T> {
 
         // Iterate through each field in the default file
         final Field[] fields = defaultFile.getClass().getDeclaredFields();
-        for (Field defaultField : fields) {
+        for (final Field defaultField : fields) {
             try {
+                // If the default field is null, skip it
+                if (defaultField.get(defaultFile) == null) {
+                    continue;
+                }
+
                 // Get the corresponding field by name in the loaded file
                 final Field loadedField = targetFile.getClass().getDeclaredField(defaultField.getName());
 
