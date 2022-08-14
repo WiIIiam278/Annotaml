@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Skip nulled default fields" />
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Remove write test">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -139,7 +142,7 @@
       <workItem from="1660208830082" duration="38196000" />
       <workItem from="1660296373435" duration="2451000" />
       <workItem from="1660388886122" duration="10463000" />
-      <workItem from="1660484898411" duration="736000" />
+      <workItem from="1660484898411" duration="2390000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -211,7 +214,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660485623723</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Remove write test">
+      <created>1660485654941</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1660485654941</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,7 +249,8 @@
     <MESSAGE value="Type descriptions, ignore reading keys annoted as ignored, set values to null if not present" />
     <MESSAGE value="Support reloading defaults from an InputStream" />
     <MESSAGE value="Skip nulled default fields" />
-    <option name="LAST_COMMIT_MESSAGE" value="Skip nulled default fields" />
+    <MESSAGE value="Remove write test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove write test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
