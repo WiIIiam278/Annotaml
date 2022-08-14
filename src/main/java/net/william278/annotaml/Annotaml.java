@@ -58,8 +58,8 @@ public class Annotaml<T> {
      *     <li>Read the file from disk, parse the YAML into the object and return it</li>
      * </ol>
      *
-     * @param defaults The object with defaults to use if not set/if the file doesn't exist.
      * @param file     The target file that will be reloaded.
+     * @param defaults The object with defaults to use if not set/if the file doesn't exist.
      * @param options  {@link LoaderOptions} to use for (re)loading the file.
      * @param <T>      the type of the class to load to/from the {@link File}
      * @return the YAML-parsed contents of the {@link File} on disk
@@ -90,6 +90,28 @@ public class Annotaml<T> {
         } catch (IOException e) {
             throw new AnnotamlException("Error reading file: " + file.getAbsolutePath());
         }
+    }
+
+    /**
+     * Reloads a YAML file from a {@link File} into a {@link T} typed object, doing a few things:
+     * <ol>
+     *     <li>Loads the defaults from the provided resource InputStream</li>
+     *     <li>Checks if the file exists; if not, writes the file and returns the defaults</li>
+     *     <li>If the file exists, copy and write defaults over if {@code copyDefaults} is true</li>
+     *     <li>Read the file from disk, parse the YAML into the object and return it</li>
+     * </ol>
+     *
+     * @param file                The target file that will be reloaded.
+     * @param defaultsInputStream The InputStream of a yaml document to read default values from.
+     * @param classType           The type of the class to load to/from the {@link File}
+     * @param options             {@link LoaderOptions} to use for (re)loading the file.
+     * @param <T>                 the type of the class to load to/from the {@link File}
+     * @return the YAML-parsed contents of the {@link File} on disk
+     * @throws AnnotamlException If an error occurs saving or loading the object to/from YAML
+     */
+    public static <T> T reload(@NotNull File file, @NotNull InputStream defaultsInputStream,
+                               @NotNull Class<T> classType, @NotNull LoaderOptions options) throws AnnotamlException {
+        return reload(file, load(defaultsInputStream, classType), options);
     }
 
     /**

@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Fix embedded object map loading">
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Type descriptions, ignore reading keys annoted as ignored, set values to null if not present">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedYaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedYaml.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleWithEmbeddedYaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleWithEmbeddedYaml.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/embedded_object_reading_test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/embedded_object_reading_test.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,7 +241,8 @@
       <workItem from="1660168491934" duration="8252000" />
       <workItem from="1660208830082" duration="38196000" />
       <workItem from="1660296373435" duration="2451000" />
-      <workItem from="1660388886122" duration="9589000" />
+      <workItem from="1660388886122" duration="10463000" />
+      <workItem from="1660484898411" duration="394000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -296,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660390045944</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Type descriptions, ignore reading keys annoted as ignored, set values to null if not present">
+      <created>1660408240498</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1660408240498</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,7 +325,8 @@
     <MESSAGE value="Adjust gradle build script" />
     <MESSAGE value="Fix custom objects, add EmbeddedListType specification" />
     <MESSAGE value="Fix embedded object map loading" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix embedded object map loading" />
+    <MESSAGE value="Type descriptions, ignore reading keys annoted as ignored, set values to null if not present" />
+    <option name="LAST_COMMIT_MESSAGE" value="Type descriptions, ignore reading keys annoted as ignored, set values to null if not present" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
