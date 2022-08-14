@@ -48,12 +48,6 @@ public class AnnotamlTests {
     }
 
     @Test
-    public void testWrite() {
-        Annotaml.save(new SampleWithEmbeddedYaml(),
-                new File("./src/test/resources/embedded_object_reading_test.yml"));
-    }
-
-    @Test
     public void testLoadingEmbeddedYamlObjects() {
         SampleWithEmbeddedYaml embeddedYamlObject = Annotaml.load(
                 Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(
