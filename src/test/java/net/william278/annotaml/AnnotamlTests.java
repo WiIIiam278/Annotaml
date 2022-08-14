@@ -48,6 +48,15 @@ public class AnnotamlTests {
     }
 
     @Test
+    public void testRootedYamlReading() {
+        SampleRootedMapYaml yaml = Annotaml.load(new File("./src/test/resources/sample_rooted_map_yaml.yml"),
+                SampleRootedMapYaml.class);
+        Assertions.assertNotNull(yaml);
+        Assertions.assertNotNull(yaml.rootMap);
+        Assertions.assertEquals(10, yaml.rootMap.size());
+    }
+
+    @Test
     public void testLoadingEmbeddedYamlObjects() {
         SampleWithEmbeddedYaml embeddedYamlObject = Annotaml.load(
                 Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(

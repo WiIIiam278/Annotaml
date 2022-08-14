@@ -179,6 +179,22 @@ public class Annotaml<T> {
             // Match field names from yaml map and set values
             final Field[] fields = classType.getDeclaredFields();
             for (final Field field : fields) {
+                // Skip fields that are annotated with @IgnoredKey
+                if (field.isAnnotationPresent(IgnoredKey.class)) {
+                    continue;
+                }
+
+                // Set the rooted map to all values
+                if (field.isAnnotationPresent(RootedMap.class)) {
+                    // If the field is a map, set the value to the map else throw an error
+                    if (field.getType().isAssignableFrom(Map.class)) {
+                        field.set(object, yamlMap);
+                    } else {
+                        throw new AnnotamlException("Field " + field.getName() + " is a RootedMap but is not present in the YAML");
+                    }
+                    continue;
+                }
+
                 // Get the field name
                 String fieldPath = getKeyedFieldName(field, yamlMap);
 
@@ -238,8 +254,7 @@ public class Annotaml<T> {
 
                 // Set the field value if present in the yaml map
                 if (yamlMap.containsKey(fieldPath)
-                    && yamlMap.get(fieldPath) != null
-                    && !field.isAnnotationPresent(IgnoredKey.class)) {
+                    && yamlMap.get(fieldPath) != null) {
 
                     getSettableValue(field, yamlMap.get(fieldPath)).ifPresent(settable -> {
                         try {
@@ -485,10 +500,10 @@ public class Annotaml<T> {
         // Serialize rootedFields
         final Map<String, Object> keyValueMap = new LinkedHashMap<>();
 
-        // Find rootedFields with @RootedKey
+        // Find rootedFields with @RootedMap
         final List<Field> rootedFields = Arrays.stream(objectClass.getDeclaredFields()).filter(field -> field.isAnnotationPresent(RootedMap.class)).collect(Collectors.toList());
         if (rootedFields.size() > 1) {
-            throw new AnnotamlException("Only one field can be annotated with @RootedMapKey");
+            throw new AnnotamlException("Only one field can be annotated with @RootedMap");
         }
         rootedFields.stream().findFirst().ifPresent(rootedField -> {
             rootedField.setAccessible(true);
