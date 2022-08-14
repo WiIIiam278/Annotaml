@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Make gradlew executable">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/sample_rooted_map_yaml.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/sample_rooted_map_yaml.yml" afterDir="false" />
-    </list>
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Fix reading root maps, add test" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -145,7 +140,7 @@
       <workItem from="1660296373435" duration="2451000" />
       <workItem from="1660388886122" duration="10463000" />
       <workItem from="1660484898411" duration="4205000" />
-      <workItem from="1660519751691" duration="588000" />
+      <workItem from="1660519751691" duration="606000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -245,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660487881003</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Fix reading root maps, add test">
+      <created>1660520350082</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1660520350082</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -277,7 +279,8 @@
     <MESSAGE value="Update README.md" />
     <MESSAGE value="Add jitpack.yml" />
     <MESSAGE value="Make gradlew executable" />
-    <option name="LAST_COMMIT_MESSAGE" value="Make gradlew executable" />
+    <MESSAGE value="Fix reading root maps, add test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix reading root maps, add test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

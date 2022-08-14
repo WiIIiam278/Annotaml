@@ -187,7 +187,7 @@ public class Annotaml<T> {
                 // Set the rooted map to all values
                 if (field.isAnnotationPresent(RootedMap.class)) {
                     // If the field is a map, set the value to the map else throw an error
-                    if (field.getType().isAssignableFrom(Map.class)) {
+                    if (field.getType().equals(Map.class)) {
                         field.set(object, yamlMap);
                     } else {
                         throw new AnnotamlException("Field " + field.getName() + " is a RootedMap but is not present in the YAML");
