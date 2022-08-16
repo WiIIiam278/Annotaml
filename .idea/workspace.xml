@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Fix reading root maps, add test" />
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="equals rather than isAssignable">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -141,6 +143,8 @@
       <workItem from="1660388886122" duration="10463000" />
       <workItem from="1660484898411" duration="4205000" />
       <workItem from="1660519751691" duration="606000" />
+      <workItem from="1660520713638" duration="738000" />
+      <workItem from="1660554628055" duration="51000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -247,7 +251,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660520350082</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="equals rather than isAssignable">
+      <created>1660520851629</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1660520851629</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,7 +291,8 @@
     <MESSAGE value="Add jitpack.yml" />
     <MESSAGE value="Make gradlew executable" />
     <MESSAGE value="Fix reading root maps, add test" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix reading root maps, add test" />
+    <MESSAGE value="equals rather than isAssignable" />
+    <option name="LAST_COMMIT_MESSAGE" value="equals rather than isAssignable" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
