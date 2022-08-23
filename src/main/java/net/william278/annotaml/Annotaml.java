@@ -198,9 +198,13 @@ public class Annotaml<T> {
                 // Get the field name
                 String fieldPath = getKeyedFieldName(field, yamlMap);
 
-                // If the field contains an embedded object, read it from the child nodes
+                // If the field type is an embedded object, read it from the child nodes
                 if (field.getType().isAnnotationPresent(EmbeddedYaml.class)) {
-                    field.set(object, readEmbeddedObject(field.getType(), yamlMap));
+                    // Filter yamlMap by objects that start with the fieldPath and a period and remove the fieldPath from the keys
+                    final Map<String, Object> childMap = yamlMap.entrySet().stream().filter(
+                            entry -> entry.getKey().startsWith(fieldPath + ".")).collect(Collectors.toMap(
+                            entry -> entry.getKey().substring(fieldPath.length() + 1), Map.Entry::getValue));
+                    field.set(object, readEmbeddedObject(field.getType(), childMap));
                     continue;
                 }
 
@@ -345,8 +349,7 @@ public class Annotaml<T> {
 
         // If the field is annotated with KeyPath, set field name to the path
         if (field.isAnnotationPresent(KeyPath.class)) {
-            final KeyPath keyPath = field.getAnnotation(KeyPath.class);
-            fieldName = keyPath.value();
+            fieldName = field.getAnnotation(KeyPath.class).value();
         }
 
         // Convert to snake case if necessary

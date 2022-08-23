@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="equals rather than isAssignable">
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Fix ver number">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleWithEmbeddedYaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleWithEmbeddedYaml.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/embedded_object_reading_test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/embedded_object_reading_test.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +51,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -126,6 +136,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.AnnotamlTests" />
+        <item itemvalue="Gradle.AnnotamlTests" />
       </list>
     </recent_temporary>
   </component>
@@ -145,6 +156,8 @@
       <workItem from="1660519751691" duration="606000" />
       <workItem from="1660520713638" duration="738000" />
       <workItem from="1660554628055" duration="51000" />
+      <workItem from="1660673024160" duration="82000" />
+      <workItem from="1661254306465" duration="1958000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -258,7 +271,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660520851629</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Fix ver number">
+      <created>1660673072720</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1660673072720</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -292,7 +312,8 @@
     <MESSAGE value="Make gradlew executable" />
     <MESSAGE value="Fix reading root maps, add test" />
     <MESSAGE value="equals rather than isAssignable" />
-    <option name="LAST_COMMIT_MESSAGE" value="equals rather than isAssignable" />
+    <MESSAGE value="Fix ver number" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix ver number" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
