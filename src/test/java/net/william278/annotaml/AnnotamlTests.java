@@ -69,6 +69,7 @@ public class AnnotamlTests {
         Assertions.assertEquals(1.0f, embeddedYamlObject.embeddedObject.aFloat);
         Assertions.assertEquals(1, embeddedYamlObject.embeddedObject.aLong);
         Assertions.assertNotNull(embeddedYamlObject.embeddedObject.aString);
+        Assertions.assertNull(embeddedYamlObject.embeddedObject.ignoredString);
 
         Assertions.assertNotNull(embeddedYamlObject.embeddedObjectList);
         Assertions.assertNotNull(embeddedYamlObject.embeddedObjectMap);
@@ -77,6 +78,7 @@ public class AnnotamlTests {
             Assertions.assertEquals(1, sampleEmbeddedObject.anInt);
             Assertions.assertTrue(sampleEmbeddedObject.aBoolean);
             Assertions.assertNotNull(sampleEmbeddedObject.aString);
+            Assertions.assertNull(sampleEmbeddedObject.ignoredString);
         }
     }
 

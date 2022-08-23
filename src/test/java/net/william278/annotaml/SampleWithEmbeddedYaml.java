@@ -22,7 +22,9 @@ public class SampleWithEmbeddedYaml {
     public static class SampleEmbeddedObject {
 
         public int anInt = 1;
-        public String aString = "aString";
+        public String aString = "Test string";
+        @IgnoredKey
+        public String ignoredString = "Ignored string";
         public boolean aBoolean = true;
         public double aDouble = 0.0d;
         public float aFloat = 1.0f;
