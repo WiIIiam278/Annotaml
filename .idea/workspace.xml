@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Update workspace.xml">
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Bump to 1.0.3, update Snakeyaml to 1.32">
+      <change afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleKeyedMapField.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/keyed_map_field.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/embedded_object_reading_test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/embedded_object_reading_test.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,13 +131,38 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="AnnotamlTests.testMapLoading" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;net.william278.annotaml.AnnotamlTests.testMapLoading&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Gradle.Annotaml build" />
+      <item itemvalue="Gradle.AnnotamlTests.testMapLoading" />
       <item itemvalue="Gradle.AnnotamlTests" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.AnnotamlTests" />
+        <item itemvalue="Gradle.AnnotamlTests.testMapLoading" />
         <item itemvalue="Gradle.AnnotamlTests" />
       </list>
     </recent_temporary>
@@ -157,7 +186,7 @@
       <workItem from="1660673024160" duration="82000" />
       <workItem from="1661254306465" duration="1958000" />
       <workItem from="1661553864793" duration="58000" />
-      <workItem from="1663580055636" duration="36000" />
+      <workItem from="1663580055636" duration="1689000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -285,7 +314,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661256592526</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Bump to 1.0.3, update Snakeyaml to 1.32">
+      <created>1663580107436</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1663580107436</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,7 +357,8 @@
     <MESSAGE value="equals rather than isAssignable" />
     <MESSAGE value="Fix ver number" />
     <MESSAGE value="Update workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update workspace.xml" />
+    <MESSAGE value="Bump to 1.0.3, update Snakeyaml to 1.32" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bump to 1.0.3, update Snakeyaml to 1.32" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -82,4 +82,14 @@ public class AnnotamlTests {
         }
     }
 
+    @Test
+    public void testMapLoading() {
+        // Load keyed_map_field.yml
+        SampleKeyedMapField rootedMapYaml = Annotaml.load(new File("./src/test/resources/keyed_map_field.yml"),
+                SampleKeyedMapField.class);
+
+        Assertions.assertNotNull(rootedMapYaml.keyedMap);
+        System.out.println(rootedMapYaml.keyedMap);
+    }
+
 }

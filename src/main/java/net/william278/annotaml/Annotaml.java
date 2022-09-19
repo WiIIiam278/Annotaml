@@ -196,7 +196,7 @@ public class Annotaml<T> {
                 }
 
                 // Get the field name
-                String fieldPath = getKeyedFieldName(field, yamlMap);
+                final String fieldPath = getKeyedFieldName(field, yamlMap);
 
                 // If the field type is an embedded object, read it from the child nodes
                 if (field.getType().isAnnotationPresent(EmbeddedYaml.class)) {
@@ -227,22 +227,9 @@ public class Annotaml<T> {
                     if (Map.class.equals(field.getType()) && field.isAnnotationPresent(EmbeddedCollection.class)) {
                         final Class<?> mapType = field.getAnnotation(EmbeddedCollection.class).value();
 
-                        // Get all the keys that start with the field path and remove the field path
-                        final Set<String> fieldPathKeys = yamlMap.keySet().stream().filter(key -> key.startsWith(fieldPath))
-                                .map(key -> key.substring(fieldPath.length() + 1)).collect(Collectors.toSet());
-                        final Map<String, Object> embeddedObjectKeys = new LinkedHashMap<>();
-                        fieldPathKeys.forEach(key -> {
-                            final String mapKey = key.split("\\.")[0];
-                            final Object mapObject = yamlMap.get(fieldPath + "." + key);
-                            if (!embeddedObjectKeys.containsKey(mapKey)) {
-                                embeddedObjectKeys.put(mapKey, new LinkedHashMap<>());
-                            }
-                            ((Map<String, Object>) embeddedObjectKeys.get(mapKey)).put(key.split("\\.")[1], mapObject);
-                        });
-
                         // Iterate through unread values and read each value as an embedded object then add to the map
                         final Map<String, Object> readMap = new LinkedHashMap<>();
-                        embeddedObjectKeys.forEach((key, value) -> {
+                        readMapAtPath(fieldPath, yamlMap).forEach((key, value) -> {
                             final Map<String, Object> itemValues = ((Map<String, Object>) value)
                                     .entrySet().stream().flatMap(Annotaml::flatten)
                                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
@@ -254,6 +241,12 @@ public class Annotaml<T> {
                     }
 
                     throw new AnnotamlException("@EmbeddedCollection field must be a List or Map: " + field.getType().getName());
+                }
+
+                // If the value is a map itself
+                if (Map.class.equals(field.getType())) {
+                    field.set(object, readMapAtPath(fieldPath, yamlMap));
+                    continue;
                 }
 
                 // Set the field value if present in the yaml map
@@ -279,6 +272,39 @@ public class Annotaml<T> {
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             throw new AnnotamlException("Error instantiating class: " + classType.getName());
         }
+    }
+
+    /**
+     * Reads a section of a yaml map as a {@link Map} of {@link String} to {@link Object}
+     *
+     * @param fieldPath The path to the map
+     * @param yamlMap   The yaml map to read from
+     * @return The map of values
+     */
+    @SuppressWarnings("unchecked")
+    private static Map<String, Object> readMapAtPath(@NotNull String fieldPath, @NotNull Map<String, Object> yamlMap) {
+        // Find all values that start with the field path and remove the field path from the keys
+        final Set<String> fieldPathKeys = yamlMap.keySet().stream().filter(key -> key.startsWith(fieldPath))
+                .map(key -> key.substring(fieldPath.length() + 1)).collect(Collectors.toSet());
+
+        // Read objects that start with the field path and remove the field path from the keys
+        final Map<String, Object> readMapObjects = new LinkedHashMap<>();
+        fieldPathKeys.forEach(key -> {
+            // Read the key
+            final String mapKey = key.split("\\.")[0];
+            final Object mapObject = yamlMap.get(fieldPath + "." + key);
+            if (!readMapObjects.containsKey(mapKey)) {
+                readMapObjects.put(mapKey, new LinkedHashMap<>());
+            }
+
+            // Set the key to the read map
+            if (!key.contains(".")) {
+                readMapObjects.put(mapKey, mapObject);
+            } else {
+                ((Map<String, Object>) readMapObjects.get(mapKey)).put(key.split("\\.")[1], mapObject);
+            }
+        });
+        return readMapObjects;
     }
 
     /**

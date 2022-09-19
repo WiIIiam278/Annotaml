@@ -1,0 +1,8 @@
+nested:
+  test_path:
+    hello: String one
+    world: String two
+    foo: String three
+    bar: String four
+    baz: String five
+    qux: String six
