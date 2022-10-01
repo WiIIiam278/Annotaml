@@ -217,6 +217,10 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
             settableObject = ((Section) value).getStringRouteMappedValues(false);
         }
 
+        if (fieldClass.isEnum()) {
+            settableObject = Enum.valueOf((Class<? extends Enum>) fieldClass, value.toString());
+        }
+
         // Set the field value
         if (settableObject != null) {
             field.set(object, settableObject);
@@ -235,7 +239,15 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
      * @throws IllegalAccessException If the field is inaccessible and could not be read for any reason
      */
     private Optional<Object> readFieldValue(@NotNull Field field, @NotNull T object) throws IllegalAccessException {
+        // Ensure the field is accessible
         field.setAccessible(true);
+
+        // If the object is an enum, return the name of the enum
+        if (field.getType().isEnum()) {
+            return Optional.ofNullable(field.get(object)).map(Object::toString);
+        }
+
+        // Otherwise, return the value of the field
         return Optional.ofNullable(field.get(object));
     }
 

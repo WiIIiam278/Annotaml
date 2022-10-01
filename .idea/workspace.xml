@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Add rootedMap property to `@YamlFile`">
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Remove debug std:out calls">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlObjectMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlObjectMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/TestYamlFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/TestYamlFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/file.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/file.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -280,11 +284,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.AnnotamlTests.testWrite" />
+        <item itemvalue="Gradle.AnnotamlTests.testRead" />
         <item itemvalue="Gradle.AnnotamlTests.testReadYamlRootedMap" />
         <item itemvalue="Gradle.AnnotamlTests.testWriteYamlRootedMap" />
-        <item itemvalue="Gradle.AnnotamlTests.testWrite" />
         <item itemvalue="Gradle.AnnotamlTests.testReadNoDefaults" />
-        <item itemvalue="Gradle.AnnotamlTests.testRead" />
       </list>
     </recent_temporary>
   </component>
@@ -313,7 +317,7 @@
       <workItem from="1664541179768" duration="7048000" />
       <workItem from="1664570610824" duration="7018000" />
       <workItem from="1664617469086" duration="3683000" />
-      <workItem from="1664638487427" duration="4404000" />
+      <workItem from="1664638487427" duration="5819000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -511,7 +515,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664643046730</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Remove debug std:out calls">
+      <created>1664644003200</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1664644003200</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -529,7 +540,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create LICENSE and README" />
     <MESSAGE value="Fix key map flattening &amp; handle enums through names" />
     <MESSAGE value="Object versioning, fixes to array casting, embedded objects, rooted maps &amp; tests" />
     <MESSAGE value="Adjust gradle build script" />
@@ -554,7 +564,8 @@
     <MESSAGE value="Update tests" />
     <MESSAGE value="Update README.md" />
     <MESSAGE value="Add rootedMap property to `@YamlFile`" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add rootedMap property to `@YamlFile`" />
+    <MESSAGE value="Remove debug std:out calls" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove debug std:out calls" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -17,6 +17,7 @@ public class TestYamlFile {
     public float test5 = 5.0f;
     @YamlIgnored
     public String ignored = "ignored";
+    public TestEnum testEnum = TestEnum.TEST2;
     public Map<TestEnum, String> test6 = Map.of(TestEnum.TEST, "test",
             TestEnum.TEST2, "test2",
             TestEnum.TEST3, "test3");

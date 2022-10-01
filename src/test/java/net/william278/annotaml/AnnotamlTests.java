@@ -11,7 +11,7 @@ public class AnnotamlTests {
 
     @Test
     public void testWrite() throws IOException {
-        final File file = new File(System.getProperty("java.io.tmpdir"), "test_write.yml");
+        final File file = new File(System.getProperty("java.io.tmpdir"), "file.yml");
 
         // If the file exists, delete
         if (file.exists()) {

@@ -9,9 +9,10 @@ test3:
 # Test comment
 test4: 4.0
 test_5: 5.0
+testEnum: TEST2
 test6:
-  TEST3: test3
   TEST: test
+  TEST3: test3
   TEST2: test2
 list:
 - test
