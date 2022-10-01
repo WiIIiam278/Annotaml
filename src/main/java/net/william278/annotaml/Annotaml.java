@@ -3,6 +3,7 @@ package net.william278.annotaml;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
@@ -53,6 +54,43 @@ public class Annotaml<T> {
     private Annotaml(@NotNull YamlObjectMap<T> yamlObjectMap) {
         this.yamlObjectMap = yamlObjectMap;
         this.objectClass = yamlObjectMap.getObjectClass();
+    }
+
+    /**
+     * Generate a new {@link Annotaml} of a {@link T objectClass} from a {@link File}
+     * <p>
+     * If the file does not exist, it will be created using the defaults translated from a new instantiation of the default object.
+     *
+     * @param file        The file to read the object from
+     * @param objectClass The class object to instantiate
+     * @param <T>         The type of object this YAML file represents
+     * @return A new {@link Annotaml} instance
+     * @throws IOException If the file cannot be read
+     */
+    @NotNull
+    public static <T> Annotaml create(@NotNull File file, @NotNull Class<T> objectClass) throws IOException,
+            InvocationTargetException, InstantiationException, IllegalAccessException {
+        return create(file, getDefaults(objectClass));
+    }
+
+    /**
+     * Generate a new {@link Annotaml} of a {@link T object} from a {@link File}, using the object field values as defaults
+     * <p>
+     * If the file does not exist, it will be created using the defaults translated from the default object.
+     *
+     * @param file   The file to read the object from
+     * @param object The default values of the file
+     * @param <T>    The type of object this YAML file represents
+     * @return A new {@link Annotaml} instance
+     * @throws IOException If the file cannot be read
+     */
+    @NotNull
+    public static <T> Annotaml create(@NotNull File file, @NotNull T object) throws IOException {
+        final Annotaml annotaml = file.exists() ? create(object, new FileInputStream(file)) : create(object);
+        if (!file.exists()) {
+            annotaml.save(file);
+        }
+        return annotaml;
     }
 
     /**
