@@ -51,7 +51,6 @@ public class AnnotamlTests {
     public void testReadYamlRootedMap() {
         try (InputStream input = Objects.requireNonNull(getClass().getClassLoader().getResource("file_rooted_map.yml")).openStream()) {
             final TestYamlRootedMapFile rootedMapFile = Annotaml.create(TestYamlRootedMapFile.class, input).get();
-            System.out.println(rootedMapFile.rootedMap);
             Assertions.assertEquals(3, rootedMapFile.rootedMap.size());
             Assertions.assertEquals("value1", rootedMapFile.rootedMap.get("test1"));
         } catch (IOException | InvocationTargetException | InstantiationException | IllegalAccessException e) {

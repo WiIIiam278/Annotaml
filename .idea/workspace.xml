@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Update README.md">
-      <change afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/TestYamlRootedMapFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/file_rooted_map.yml" afterDir="false" />
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Add rootedMap property to `@YamlFile`">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlObjectMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlObjectMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -319,7 +313,7 @@
       <workItem from="1664541179768" duration="7048000" />
       <workItem from="1664570610824" duration="7018000" />
       <workItem from="1664617469086" duration="3683000" />
-      <workItem from="1664638487427" duration="3583000" />
+      <workItem from="1664638487427" duration="4404000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -510,7 +504,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664637355675</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Add rootedMap property to `@YamlFile`">
+      <created>1664643046730</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1664643046730</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -528,7 +529,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Initial commit" />
     <MESSAGE value="Create LICENSE and README" />
     <MESSAGE value="Fix key map flattening &amp; handle enums through names" />
     <MESSAGE value="Object versioning, fixes to array casting, embedded objects, rooted maps &amp; tests" />
@@ -553,7 +553,8 @@
     <MESSAGE value="Add method to create and reload file" />
     <MESSAGE value="Update tests" />
     <MESSAGE value="Update README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update README.md" />
+    <MESSAGE value="Add rootedMap property to `@YamlFile`" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add rootedMap property to `@YamlFile`" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
