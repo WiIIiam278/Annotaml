@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static dev.dejvokep.boostedyaml.utils.conversion.PrimitiveConversions.NON_NUMERIC_CONVERSIONS;
@@ -251,7 +250,7 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
                         .collect(Collectors.toList())));
             }
         });
-        //todo fix comment duplication
+
         yamlDocument.save();
     }
 
