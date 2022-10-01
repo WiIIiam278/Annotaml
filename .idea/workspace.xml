@@ -5,36 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Start v2 development based on BoostedYaml">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlComment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlIgnored.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlKey.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlObjectMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/TestYamlFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/TestYamlNoDefaultsFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/file_no_defaults.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/AnnotamlException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedCollection.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedYaml.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/IgnoredKey.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/KeyPath.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/RootedMap.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlObjectMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlObjectMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleConfigYaml.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleKeyedMapField.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleRootedMapYaml.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleWithEmbeddedYaml.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleYaml.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/embedded_object_reading_test.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/keyed_map_field.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/sample_config_yaml.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/sample_rooted_map_yaml.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/sample_with_embedded_yaml.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/sample_yaml.yml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +94,12 @@
       <recent name="net.william278.annotaml" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.AnnotamlTests.testWrite">
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="{" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Gradle.Annotaml test">
     <configuration name="Annotaml build" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -272,7 +250,8 @@
       <workItem from="1663581994691" duration="16000" />
       <workItem from="1663934558893" duration="15680000" />
       <workItem from="1664541179768" duration="7048000" />
-      <workItem from="1664570610824" duration="6984000" />
+      <workItem from="1664570610824" duration="7018000" />
+      <workItem from="1664617469086" duration="1155000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -414,7 +393,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663581800638</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Start v2 development based on BoostedYaml">
+      <created>1664590039108</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1664590039108</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

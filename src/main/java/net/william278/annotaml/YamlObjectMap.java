@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static dev.dejvokep.boostedyaml.utils.conversion.PrimitiveConversions.NON_NUMERIC_CONVERSIONS;
@@ -79,6 +80,7 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
     private void readDefaults(@NotNull T object) throws IllegalArgumentException {
         // Iterate through each field
         final Field[] fields = object.getClass().getDeclaredFields();
+        int fieldIndex = 0;
         for (final Field field : fields) {
             // Ignore fields that are annotated with @YamlIgnored
             if (field.isAnnotationPresent(YamlIgnored.class)) {
@@ -89,9 +91,21 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
             final String key = field.isAnnotationPresent(YamlKey.class) ?
                     field.getAnnotation(YamlKey.class).value() : field.getName();
 
+            // If the field is the first in the object, add the header as a comment
+            if (fieldIndex == 0) {
+                final String headerComment = getObjectClass().getAnnotation(YamlFile.class).header();
+                if (!headerComment.isEmpty()) {
+                    comments.put(key, headerComment);
+                }
+            }
+
             // If the field has a comment annotation, add it to the comments map
             if (field.isAnnotationPresent(YamlComment.class)) {
-                comments.put(key, field.getAnnotation(YamlComment.class).value());
+                if (comments.containsKey(key)) {
+                    comments.put(key, comments.get(key) + "\n" + field.getAnnotation(YamlComment.class).value());
+                } else {
+                    comments.put(key, field.getAnnotation(YamlComment.class).value());
+                }
             }
 
             // Attempt to read the value from the field and add it to the map
@@ -102,6 +116,8 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
                 throw new IllegalArgumentException("Unable to read field " + field.getName() + " from object " +
                                                    object.getClass().getName() + " to map at YAML path " + field.getName(), e);
             }
+
+            fieldIndex++;
         }
     }
 
@@ -221,22 +237,15 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
         // Create YamlDocument that will be dumped as a file
         final YamlDocument yamlDocument = YamlDocument.create(file);
 
-        // Add the header comment
-        final String headerComment = getObjectClass().getAnnotation(YamlFile.class).header();
-        if (!headerComment.isBlank()) {
-            yamlDocument.setComments(Arrays
-                    .stream(headerComment.split("\n"))
-                    .map(String::trim)
-                    .map(comment -> " " + comment)
-                    .collect(Collectors.toList()));
-        }
-
         // Set key-values and associated comments if applicable
         this.forEach((key, value) -> {
+            // Set the value
             yamlDocument.set(key, value);
+
+            // Set block comments
             if (comments.containsKey(key)) {
                 yamlDocument.getBlock(key).setComments((Arrays
-                        .stream(comments.get(key).split("\n"))
+                        .stream(comments.get(key).split("\\r?\\n"))
                         .map(String::trim)
                         .map(comment -> " " + comment)
                         .collect(Collectors.toList())));

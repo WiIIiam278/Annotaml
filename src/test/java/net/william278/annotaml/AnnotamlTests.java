@@ -11,12 +11,8 @@ public class AnnotamlTests {
     @Test
     public void testWrite() throws IOException {
         // Write a file to the temp directory
-        Annotaml.create(new TestYamlFile())
-                .save(new File("C:/Users/William/IdeaProjects/Annotaml/src/test/resources/file.yml"));
-
-
-        //Annotaml.create(new TestYamlFile())
-        //        .save(new File(System.getProperty("java.io.tmpdir"), "test_write.yml"));
+        Annotaml.create(new TestYamlFile()).save(
+                new File(System.getProperty("java.io.tmpdir"), "test_write.yml"));
     }
 
     @Test
