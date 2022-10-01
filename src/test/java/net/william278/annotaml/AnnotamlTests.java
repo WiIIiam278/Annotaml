@@ -37,7 +37,7 @@ public class AnnotamlTests {
     @Test
     public void testReadNoDefaults() {
         try (InputStream input = Objects.requireNonNull(getClass().getClassLoader().getResource("file_no_defaults.yml")).openStream()) {
-            final TestYamlNoDefaultsFile noDefaultsFile = (TestYamlNoDefaultsFile) Annotaml.create(TestYamlNoDefaultsFile.class, input).get();
+            final TestYamlNoDefaultsFile noDefaultsFile = Annotaml.create(TestYamlNoDefaultsFile.class, input).get();
             Assertions.assertEquals("Hello", noDefaultsFile.value1);
             Assertions.assertEquals(33.3, noDefaultsFile.value2);
             Assertions.assertTrue(noDefaultsFile.value3);
