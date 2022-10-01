@@ -68,7 +68,7 @@ public class Annotaml<T> {
      * @throws IOException If the file cannot be read
      */
     @NotNull
-    public static <T> Annotaml create(@NotNull File file, @NotNull Class<T> objectClass) throws IOException,
+    public static <T> Annotaml<T> create(@NotNull File file, @NotNull Class<T> objectClass) throws IOException,
             InvocationTargetException, InstantiationException, IllegalAccessException {
         return create(file, getDefaults(objectClass));
     }
@@ -85,8 +85,8 @@ public class Annotaml<T> {
      * @throws IOException If the file cannot be read
      */
     @NotNull
-    public static <T> Annotaml create(@NotNull File file, @NotNull T object) throws IOException {
-        final Annotaml annotaml = file.exists() ? create(object, new FileInputStream(file)) : create(object);
+    public static <T> Annotaml<T> create(@NotNull File file, @NotNull T object) throws IOException {
+        final Annotaml<T> annotaml = file.exists() ? create(object, new FileInputStream(file)) : create(object);
         if (!file.exists()) {
             annotaml.save(file);
         }
@@ -103,7 +103,7 @@ public class Annotaml<T> {
      * @return A new {@link Annotaml} instance
      */
     @NotNull
-    public static <T> Annotaml create(@NotNull T object) {
+    public static <T> Annotaml<T> create(@NotNull T object) {
         return new Annotaml<>(object);
     }
 
@@ -117,7 +117,7 @@ public class Annotaml<T> {
      * @throws IOException If an error occurs while reading the YAML
      */
     @NotNull
-    public static <T> Annotaml create(@NotNull T defaults, @NotNull InputStream inputStream) throws IOException {
+    public static <T> Annotaml<T> create(@NotNull T defaults, @NotNull InputStream inputStream) throws IOException {
         return new Annotaml<>(YamlObjectMap.parse(defaults, inputStream));
     }
 
@@ -137,7 +137,7 @@ public class Annotaml<T> {
      * @throws IllegalAccessException    If an error occurs while accessing the object
      */
     @NotNull
-    public static <T> Annotaml create(@NotNull Class<T> objectClass, @NotNull InputStream inputStream) throws IOException,
+    public static <T> Annotaml<T> create(@NotNull Class<T> objectClass, @NotNull InputStream inputStream) throws IOException,
             InvocationTargetException, InstantiationException, IllegalAccessException {
         return new Annotaml<>(YamlObjectMap.parse(Annotaml.getDefaults(objectClass), inputStream));
     }
