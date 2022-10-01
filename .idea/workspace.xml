@@ -4,13 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Bump to 1.0.3, update Snakeyaml to 1.32">
-      <change afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleKeyedMapField.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/keyed_map_field.yml" afterDir="false" />
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Start v2 development based on BoostedYaml">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlComment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlIgnored.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlKey.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlObjectMap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/TestYamlFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/TestYamlNoDefaultsFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/file_no_defaults.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/AnnotamlException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedCollection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/EmbeddedYaml.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/IgnoredKey.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/KeyPath.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/RootedMap.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/embedded_object_reading_test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/embedded_object_reading_test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleConfigYaml.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleKeyedMapField.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleRootedMapYaml.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleWithEmbeddedYaml.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/SampleYaml.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/embedded_object_reading_test.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/keyed_map_field.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/sample_config_yaml.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/sample_rooted_map_yaml.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/sample_with_embedded_yaml.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/sample_yaml.yml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,8 +69,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="AnnotationType" />
         <option value="Class" />
+        <option value="AnnotationType" />
       </list>
     </option>
   </component>
@@ -57,6 +81,12 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/dev.dejvokep/boosted-yaml/1.3/9a721171f7e11e9f4b74f42e3fe73b74a7fcc491/boosted-yaml-1.3-sources.jar!/dev/dejvokep/boostedyaml/dvs/versioning/AutomaticVersioning.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/dev.dejvokep/boosted-yaml/1.3/9a721171f7e11e9f4b74f42e3fe73b74a7fcc491/boosted-yaml-1.3-sources.jar!/dev/dejvokep/boostedyaml/dvs/versioning/BasicVersioning.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/dev.dejvokep/boosted-yaml/1.3/9a721171f7e11e9f4b74f42e3fe73b74a7fcc491/boosted-yaml-1.3-sources.jar!/dev/dejvokep/boostedyaml/dvs/versioning/ManualVersioning.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/dev.dejvokep/boosted-yaml/1.3/9a721171f7e11e9f4b74f42e3fe73b74a7fcc491/boosted-yaml-1.3-sources.jar!/dev/dejvokep/boostedyaml/dvs/versioning/Versioning.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -84,8 +114,14 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\William\IdeaProjects\Annotaml\src\test\resources" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\William\IdeaProjects\Annotaml\src\test\java" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="net.william278.annotaml" />
+    </key>
   </component>
-  <component name="RunManager" selected="Gradle.AnnotamlTests">
+  <component name="RunManager" selected="Gradle.AnnotamlTests.testWrite">
     <configuration name="Annotaml build" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -108,7 +144,28 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="AnnotamlTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Annotaml test" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="AnnotamlTests.testRead" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -121,7 +178,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;net.william278.annotaml.AnnotamlTests&quot;" />
+            <option value="&quot;net.william278.annotaml.AnnotamlTests.testRead&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -131,7 +188,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="AnnotamlTests.testMapLoading" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="AnnotamlTests.testReadNoDefaults" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -144,7 +201,30 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;net.william278.annotaml.AnnotamlTests.testMapLoading&quot;" />
+            <option value="&quot;net.william278.annotaml.AnnotamlTests.testReadNoDefaults&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="AnnotamlTests.testWrite" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;net.william278.annotaml.AnnotamlTests.testWrite&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -156,14 +236,16 @@
     </configuration>
     <list>
       <item itemvalue="Gradle.Annotaml build" />
-      <item itemvalue="Gradle.AnnotamlTests.testMapLoading" />
-      <item itemvalue="Gradle.AnnotamlTests" />
+      <item itemvalue="Gradle.Annotaml test" />
+      <item itemvalue="Gradle.AnnotamlTests.testRead" />
+      <item itemvalue="Gradle.AnnotamlTests.testReadNoDefaults" />
+      <item itemvalue="Gradle.AnnotamlTests.testWrite" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.AnnotamlTests" />
-        <item itemvalue="Gradle.AnnotamlTests.testMapLoading" />
-        <item itemvalue="Gradle.AnnotamlTests" />
+        <item itemvalue="Gradle.AnnotamlTests.testWrite" />
+        <item itemvalue="Gradle.AnnotamlTests.testReadNoDefaults" />
+        <item itemvalue="Gradle.AnnotamlTests.testRead" />
       </list>
     </recent_temporary>
   </component>
@@ -186,7 +268,11 @@
       <workItem from="1660673024160" duration="82000" />
       <workItem from="1661254306465" duration="1958000" />
       <workItem from="1661553864793" duration="58000" />
-      <workItem from="1663580055636" duration="1689000" />
+      <workItem from="1663580055636" duration="1863000" />
+      <workItem from="1663581994691" duration="16000" />
+      <workItem from="1663934558893" duration="15680000" />
+      <workItem from="1664541179768" duration="7048000" />
+      <workItem from="1664570610824" duration="6984000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -321,7 +407,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663580107436</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Fix maps not being read properly (https://github.com/WiIIiam278/HuskHomes2/issues/220)">
+      <created>1663581800638</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1663581800638</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,7 +451,9 @@
     <MESSAGE value="Fix ver number" />
     <MESSAGE value="Update workspace.xml" />
     <MESSAGE value="Bump to 1.0.3, update Snakeyaml to 1.32" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bump to 1.0.3, update Snakeyaml to 1.32" />
+    <MESSAGE value="Fix maps not being read properly (https://github.com/WiIIiam278/HuskHomes2/issues/220)" />
+    <MESSAGE value="Start v2 development based on BoostedYaml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Start v2 development based on BoostedYaml" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,0 +1,7 @@
+value1: 'Hello'
+value2: 33.3
+value3: true
+value4:
+  key1: 'value1'
+  key2: 'value2'
+  key3: 'value3'

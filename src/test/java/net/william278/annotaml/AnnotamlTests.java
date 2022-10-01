@@ -3,93 +3,44 @@ package net.william278.annotaml;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.util.Objects;
-import java.util.Optional;
+import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 
 public class AnnotamlTests {
 
-    private final Object[] objects = new Object[]{new SampleYaml(), new SampleWithEmbeddedYaml(),
-            new SampleRootedMapYaml(), new SampleConfigYaml()};
-
-    // Iterates through test objects to test serialization
     @Test
-    public void testObjectSerialization() {
-        for (final Object file : objects) {
-            Annotaml.save(file, new File(new File(System.getProperty("java.io.tmpdir")),
-                    Annotaml.convertToSnakeCase(file.getClass().getSimpleName()) + ".yml"));
+    public void testWrite() throws IOException {
+        // Write a file to the temp directory
+        Annotaml.create(new TestYamlFile())
+                .save(new File("C:/Users/William/IdeaProjects/Annotaml/src/test/resources/file.yml"));
+
+
+        //Annotaml.create(new TestYamlFile())
+        //        .save(new File(System.getProperty("java.io.tmpdir"), "test_write.yml"));
+    }
+
+    @Test
+    public void testRead() {
+        try (FileInputStream input = new FileInputStream("C:/Users/William/IdeaProjects/Annotaml/src/test/resources/file.yml")) {
+            final TestYamlFile readFile = (TestYamlFile) Annotaml.create(new TestYamlFile(), input).get();
+            Assertions.assertEquals("test", readFile.test);
+            Assertions.assertTrue(readFile.test3);
+            Assertions.assertEquals(3, readFile.test6.size());
+        } catch (IOException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Test
-    public void testObjectDeserialization() {
-        for (final Object file : objects) {
-            final String fileName = Annotaml.convertToSnakeCase(file.getClass().getSimpleName() + ".yml");
-            final Object loaded = Annotaml.load(Objects.requireNonNull(getClass()
-                    .getClassLoader().getResourceAsStream(fileName)), file.getClass());
-            Annotaml.save(loaded, new File(new File(System.getProperty("java.io.tmpdir")),
-                    Annotaml.convertToSnakeCase(file.getClass().getSimpleName()) + ".yml"));
+    public void testReadNoDefaults() {
+        try (FileInputStream input = new FileInputStream("C:/Users/William/IdeaProjects/Annotaml/src/test/resources/file_no_defaults.yml")) {
+            final TestYamlNoDefaultsFile noDefaultsFile = (TestYamlNoDefaultsFile) Annotaml.create(TestYamlNoDefaultsFile.class, input).get();
+            Assertions.assertEquals("Hello", noDefaultsFile.value1);
+            Assertions.assertEquals(33.3, noDefaultsFile.value2);
+            Assertions.assertTrue(noDefaultsFile.value3);
+            Assertions.assertEquals(3, noDefaultsFile.value4.size());
+        } catch (IOException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
     }
-
-    @Test
-    public void testObjectVersioning() {
-        final Optional<Integer> versionNumber = Annotaml.getVersionNumber(Objects.requireNonNull(getClass().getClassLoader()
-                        .getResourceAsStream(Annotaml.convertToSnakeCase(SampleConfigYaml.class.getSimpleName() + ".yml"))),
-                SampleConfigYaml.class);
-        Assertions.assertTrue(versionNumber.isPresent());
-        Assertions.assertEquals(1, versionNumber.get().intValue());
-    }
-
-    @Test
-    public void testUpdating() {
-        Annotaml.reload(new File("./src/test/resources/embedded_object_reading_test.yml"), new SampleWithEmbeddedYaml(),
-                Annotaml.LoaderOptions.builder().copyDefaults(true));
-    }
-
-    @Test
-    public void testRootedYamlReading() {
-        SampleRootedMapYaml yaml = Annotaml.load(new File("./src/test/resources/sample_rooted_map_yaml.yml"),
-                SampleRootedMapYaml.class);
-        Assertions.assertNotNull(yaml);
-        Assertions.assertNotNull(yaml.rootMap);
-        Assertions.assertEquals(10, yaml.rootMap.size());
-    }
-
-    @Test
-    public void testLoadingEmbeddedYamlObjects() {
-        SampleWithEmbeddedYaml embeddedYamlObject = Annotaml.load(
-                Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(
-                        "embedded_object_reading_test.yml")), SampleWithEmbeddedYaml.class);
-        Assertions.assertNotNull(embeddedYamlObject);
-        Assertions.assertNotNull(embeddedYamlObject.embeddedObject);
-
-        Assertions.assertTrue(embeddedYamlObject.embeddedObject.aBoolean);
-        Assertions.assertEquals(0.0d, embeddedYamlObject.embeddedObject.aDouble);
-        Assertions.assertEquals(1.0f, embeddedYamlObject.embeddedObject.aFloat);
-        Assertions.assertEquals(1, embeddedYamlObject.embeddedObject.aLong);
-        Assertions.assertNotNull(embeddedYamlObject.embeddedObject.aString);
-        Assertions.assertNull(embeddedYamlObject.embeddedObject.ignoredString);
-
-        Assertions.assertNotNull(embeddedYamlObject.embeddedObjectList);
-        Assertions.assertNotNull(embeddedYamlObject.embeddedObjectMap);
-
-        for (final SampleWithEmbeddedYaml.SampleEmbeddedObject sampleEmbeddedObject : embeddedYamlObject.embeddedObjectList) {
-            Assertions.assertEquals(1, sampleEmbeddedObject.anInt);
-            Assertions.assertTrue(sampleEmbeddedObject.aBoolean);
-            Assertions.assertNotNull(sampleEmbeddedObject.aString);
-            Assertions.assertNull(sampleEmbeddedObject.ignoredString);
-        }
-    }
-
-    @Test
-    public void testMapLoading() {
-        // Load keyed_map_field.yml
-        SampleKeyedMapField rootedMapYaml = Annotaml.load(new File("./src/test/resources/keyed_map_field.yml"),
-                SampleKeyedMapField.class);
-
-        Assertions.assertNotNull(rootedMapYaml.keyedMap);
-        System.out.println(rootedMapYaml.keyedMap);
-    }
-
 }

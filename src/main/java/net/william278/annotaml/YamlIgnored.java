@@ -1,20 +1,14 @@
 package net.william278.annotaml;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Identifies a custom path in the YAML file that should be used for saving a field.
+ * Identifies a value within a {@link YamlFile} that should be ignored when parsing and dumping to/from disk.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
-public @interface KeyPath {
-
-    @NotNull
-    String value();
-
+public @interface YamlIgnored {
 }

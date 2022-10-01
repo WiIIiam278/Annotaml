@@ -1,29 +1,19 @@
 package net.william278.annotaml;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import dev.dejvokep.boostedyaml.YamlDocument;
+import org.jetbrains.annotations.NotNull;
+
 /**
- * Identifies a file that can be saved and loaded from a YAML file. Requires a constructor with no arguments present.
- * <p>
- * Not to be confused with {@link EmbeddedYaml}, which specifies custom types that can be embedded within this file.
+ * Identifies a file that can be parsed and dumped as a {@link YamlDocument}
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
 public @interface YamlFile {
-
-    /**
-     * Whether to convert fields to {@code snake_case}
-     * <p>
-     * Default: {@code true}
-     *
-     * @return Whether to convert fields to {@code snake_case}
-     */
-    boolean convertToSnakeCase() default true;
 
     /**
      * Header to include at the top of the generated file
@@ -42,8 +32,8 @@ public @interface YamlFile {
      *
      * @return The field to use as a key for the version of the file
      */
-    @NotNull
-    String versionField() default "";
+    @NotNull //todo
+    String versionField() default "version";
 
     /**
      * The current version number of the file. This will be written to the config to the field specified by {@link #versionField()}. If {@link #versionField()} is {@code ""}, this will be omitted from the config.
@@ -52,6 +42,7 @@ public @interface YamlFile {
      *
      * @return The current version number of the file
      */
+    //todo
     int versionNumber() default 1;
 
 }
