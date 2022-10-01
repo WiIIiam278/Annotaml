@@ -24,6 +24,13 @@ public @interface YamlFile {
     String header() default "";
 
     /**
+     * Indicates if this file should be read/written to/from a single map field
+     *
+     * @return If this file is a rooted map
+     */
+    boolean rootedMap() default false;
+
+    /**
      * The field to use as a key for the version of the file
      * <p>
      * If set to {@code ""} (empty string), the version will be omitted from the file
@@ -32,7 +39,8 @@ public @interface YamlFile {
      *
      * @return The field to use as a key for the version of the file
      */
-    @NotNull //todo
+    //todo
+    @NotNull
     String versionField() default "version";
 
     /**

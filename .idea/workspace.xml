@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Add method to create and reload file">
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Update README.md">
+      <change afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/TestYamlRootedMapFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/file_rooted_map.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlObjectMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlObjectMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,8 +46,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="AnnotationType" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -202,6 +206,29 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="AnnotamlTests.testReadYamlRootedMap" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;net.william278.annotaml.AnnotamlTests.testReadYamlRootedMap&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="AnnotamlTests.testWrite" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -225,15 +252,42 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="AnnotamlTests.testWriteYamlRootedMap" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;net.william278.annotaml.AnnotamlTests.testWriteYamlRootedMap&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Gradle.Annotaml build" />
       <item itemvalue="Gradle.Annotaml test" />
+      <item itemvalue="Gradle.AnnotamlTests.testReadYamlRootedMap" />
+      <item itemvalue="Gradle.AnnotamlTests.testWriteYamlRootedMap" />
       <item itemvalue="Gradle.AnnotamlTests.testRead" />
       <item itemvalue="Gradle.AnnotamlTests.testReadNoDefaults" />
       <item itemvalue="Gradle.AnnotamlTests.testWrite" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.AnnotamlTests.testReadYamlRootedMap" />
+        <item itemvalue="Gradle.AnnotamlTests.testWriteYamlRootedMap" />
         <item itemvalue="Gradle.AnnotamlTests.testWrite" />
         <item itemvalue="Gradle.AnnotamlTests.testReadNoDefaults" />
         <item itemvalue="Gradle.AnnotamlTests.testRead" />
@@ -265,6 +319,7 @@
       <workItem from="1664541179768" duration="7048000" />
       <workItem from="1664570610824" duration="7018000" />
       <workItem from="1664617469086" duration="3683000" />
+      <workItem from="1664638487427" duration="3583000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -434,7 +489,28 @@
       <option name="project" value="LOCAL" />
       <updated>1664625448233</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Update tests">
+      <created>1664637298037</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1664637298037</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Update tests">
+      <created>1664637307377</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1664637307377</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Update README.md">
+      <created>1664637355675</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1664637355675</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -463,7 +539,6 @@
     <MESSAGE value="Support reloading defaults from an InputStream" />
     <MESSAGE value="Skip nulled default fields" />
     <MESSAGE value="Remove write test" />
-    <MESSAGE value="Update README.md" />
     <MESSAGE value="Add jitpack.yml" />
     <MESSAGE value="Make gradlew executable" />
     <MESSAGE value="Fix reading root maps, add test" />
@@ -476,7 +551,9 @@
     <MESSAGE value="Fix header comment duplication" />
     <MESSAGE value="Cleanup TODO" />
     <MESSAGE value="Add method to create and reload file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add method to create and reload file" />
+    <MESSAGE value="Update tests" />
+    <MESSAGE value="Update README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update README.md" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

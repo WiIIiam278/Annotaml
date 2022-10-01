@@ -163,6 +163,7 @@ public class Annotaml<T> {
      */
     @NotNull
     public T get() throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        System.out.println("haa: " + yamlObjectMap);
         return yamlObjectMap.getObject();
     }
 

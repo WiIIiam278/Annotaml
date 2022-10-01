@@ -46,4 +46,29 @@ public class AnnotamlTests {
             throw new RuntimeException(e);
         }
     }
+
+    @Test
+    public void testReadYamlRootedMap() {
+        try (InputStream input = Objects.requireNonNull(getClass().getClassLoader().getResource("file_rooted_map.yml")).openStream()) {
+            final TestYamlRootedMapFile rootedMapFile = Annotaml.create(TestYamlRootedMapFile.class, input).get();
+            System.out.println(rootedMapFile.rootedMap);
+            Assertions.assertEquals(3, rootedMapFile.rootedMap.size());
+            Assertions.assertEquals("value1", rootedMapFile.rootedMap.get("test1"));
+        } catch (IOException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void testWriteYamlRootedMap() throws IOException {
+        final File file = new File(System.getProperty("java.io.tmpdir"), "test_write_rooted_map.yml");
+
+        // If the file exists, delete
+        if (file.exists()) {
+            Assertions.assertTrue(file.delete());
+        }
+
+        // Write a file to the temp directory
+        Annotaml.create(new TestYamlRootedMapFile()).save(file);
+    }
 }

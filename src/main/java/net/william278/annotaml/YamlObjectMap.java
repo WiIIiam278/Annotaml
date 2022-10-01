@@ -16,8 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static dev.dejvokep.boostedyaml.utils.conversion.PrimitiveConversions.NON_NUMERIC_CONVERSIONS;
-import static dev.dejvokep.boostedyaml.utils.conversion.PrimitiveConversions.convertNumber;
+import static dev.dejvokep.boostedyaml.utils.conversion.PrimitiveConversions.*;
 
 /**
  * Represents a {@link T} object as a mapped set of paths to their object values, as read to/from a {@link YamlFile}
@@ -76,8 +75,15 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
      *
      * @param object the object to read from
      */
+    @SuppressWarnings("unchecked")
     private void readDefaults(@NotNull T object) throws IllegalArgumentException {
-        // Iterate through each field
+        // Validate object
+        if (!object.getClass().isAnnotationPresent(YamlFile.class)) {
+            throw new IllegalArgumentException("Object type must be annotated with @YamlFile");
+        }
+
+        // Check if this is a rooted map, then begin iterating through the fields
+        final boolean rootedMap = object.getClass().getAnnotation(YamlFile.class).rootedMap();
         final Field[] fields = object.getClass().getDeclaredFields();
         int fieldIndex = 0;
         for (final Field field : fields) {
@@ -87,8 +93,10 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
             }
 
             // If the field is annotated with @YamlKey, use the value as the key
-            final String key = field.isAnnotationPresent(YamlKey.class) ?
-                    field.getAnnotation(YamlKey.class).value() : field.getName();
+            final String key = rootedMap ? ""
+                    : field.isAnnotationPresent(YamlKey.class)
+                    ? field.getAnnotation(YamlKey.class).value()
+                    : field.getName();
 
             // If the field is the first in the object, add the header as a comment
             if (fieldIndex == 0) {
@@ -105,6 +113,16 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
                 } else {
                     comments.put(key, field.getAnnotation(YamlComment.class).value());
                 }
+            }
+
+            // If it's a rooted map, add the read map values to the root of the map
+            if (rootedMap) {
+                try {
+                    readFieldValue(field, object).ifPresent(value -> this.putAll((Map<String, Object>) value));
+                } catch (IllegalAccessException e) {
+                    throw new IllegalArgumentException("Unable to read rooted map value " + field.getName(), e);
+                }
+                return;
             }
 
             // Attempt to read the value from the field and add it to the map
@@ -128,12 +146,31 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
      * @throws IllegalArgumentException If a field could not be accessed and set from the map
      */
     private T applyMapTo(@NotNull T defaults) throws IllegalArgumentException {
+        final boolean rootedMap = defaults.getClass().getAnnotation(YamlFile.class).rootedMap();
+
         // Iterate through each field
         final Field[] fields = defaults.getClass().getDeclaredFields();
         for (final Field field : fields) {
             // Ignore fields that are annotated with @YamlIgnored
             if (field.isAnnotationPresent(YamlIgnored.class)) {
                 continue;
+            }
+
+            // Handle rooted maps
+            if (rootedMap) {
+                if (!field.getType().equals(Map.class)) {
+                    throw new IllegalArgumentException("Field " + field.getName() + " is part of a rooted map but is not a Map (is "
+                                                       + field.getType().getName() + ")");
+                }
+
+                // Write the rooted map to the field
+                try {
+                    writeFieldValue(field, defaults, this);
+                } catch (IllegalAccessException e) {
+                    throw new IllegalArgumentException("Unable to write rooted field " + field.getName() + " from object " +
+                                                       defaults.getClass().getName() + " to " + field.getName(), e);
+                }
+                return defaults;
             }
 
             // If the field is annotated with @YamlKey, use the value as the key
@@ -209,6 +246,14 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
      */
     @NotNull
     private YamlObjectMap<T> readFromYaml(@NotNull YamlDocument yamlDocument) {
+        // If it's a rooted map, read each value from the root
+        if (getObjectClass().getAnnotation(YamlFile.class).rootedMap()) {
+            this.clear();
+            this.putAll(yamlDocument.getStringRouteMappedValues(false));
+            return this;
+        }
+
+        // Otherwise, read each field from the mapped document
         this.forEach((key, value) -> this.put(key, yamlDocument.get(key)));
         return this;
     }
