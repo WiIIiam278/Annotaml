@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Cleanup TODO">
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Add method to create and reload file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/Annotaml.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,7 +249,7 @@
       <workItem from="1663934558893" duration="15680000" />
       <workItem from="1664541179768" duration="7048000" />
       <workItem from="1664570610824" duration="7018000" />
-      <workItem from="1664617469086" duration="1855000" />
+      <workItem from="1664617469086" duration="3683000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -413,7 +412,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664624756929</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Add method to create and reload file">
+      <created>1664625448233</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1664625448233</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -454,7 +460,8 @@
     <MESSAGE value="Start v2 development based on BoostedYaml" />
     <MESSAGE value="Fix header comment duplication" />
     <MESSAGE value="Cleanup TODO" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleanup TODO" />
+    <MESSAGE value="Add method to create and reload file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add method to create and reload file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
