@@ -14,6 +14,10 @@ test6:
   TEST: test
   TEST3: test3
   TEST2: test2
+test7:
+  test: value
+  test2: value2
+  test3: three
 list:
 - test
 - test2

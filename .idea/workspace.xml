@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Remove debug std:out calls">
+    <list default="true" id="8dabb562-0108-4fab-8ab7-35516d9313ec" name="Changes" comment="Dump/parse enum fields as strings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlObjectMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/william278/annotaml/YamlObjectMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/AnnotamlTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/TestYamlFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/net/william278/annotaml/TestYamlFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/file.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/file.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -317,7 +313,12 @@
       <workItem from="1664541179768" duration="7048000" />
       <workItem from="1664570610824" duration="7018000" />
       <workItem from="1664617469086" duration="3683000" />
-      <workItem from="1664638487427" duration="5819000" />
+      <workItem from="1664638487427" duration="6531000" />
+      <workItem from="1664655382487" duration="851000" />
+      <workItem from="1664721461415" duration="2119000" />
+      <workItem from="1665515174464" duration="757000" />
+      <workItem from="1665517058253" duration="596000" />
+      <workItem from="1665582892757" duration="17000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1660179217409</created>
@@ -522,7 +523,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664644003200</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Dump/parse enum fields as strings">
+      <created>1664645336727</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1664645336727</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,7 +548,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix key map flattening &amp; handle enums through names" />
     <MESSAGE value="Object versioning, fixes to array casting, embedded objects, rooted maps &amp; tests" />
     <MESSAGE value="Adjust gradle build script" />
     <MESSAGE value="Fix custom objects, add EmbeddedListType specification" />
@@ -565,7 +572,8 @@
     <MESSAGE value="Update README.md" />
     <MESSAGE value="Add rootedMap property to `@YamlFile`" />
     <MESSAGE value="Remove debug std:out calls" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove debug std:out calls" />
+    <MESSAGE value="Dump/parse enum fields as strings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dump/parse enum fields as strings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

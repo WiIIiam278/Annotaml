@@ -21,6 +21,11 @@ public class TestYamlFile {
     public Map<TestEnum, String> test6 = Map.of(TestEnum.TEST, "test",
             TestEnum.TEST2, "test2",
             TestEnum.TEST3, "test3");
+    public Map<String, String> test7 = Map.of("test", "value",
+            "test2", "value2",
+            "test3", "value3",
+            "test4", "value4",
+            "test5", "value5");
     public List<String> list = List.of("test", "test2", "test3");
 
     public TestYamlFile() {

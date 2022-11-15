@@ -29,6 +29,8 @@ public class AnnotamlTests {
             Assertions.assertEquals("test", readFile.test);
             Assertions.assertTrue(readFile.test3);
             Assertions.assertEquals(3, readFile.test6.size());
+            Assertions.assertEquals(3, readFile.test7.size());
+            Assertions.assertEquals("three", readFile.test7.get("test3"));
         } catch (IOException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
