@@ -65,7 +65,11 @@ public class Annotaml<T> {
      * @param objectClass The class object to instantiate
      * @param <T>         The type of object this YAML file represents
      * @return A new {@link Annotaml} instance
-     * @throws IOException If the file cannot be read
+     * @throws IOException               If the file cannot be read
+     * @throws IllegalArgumentException  If the object is not annotated with {@link YamlFile}
+     * @throws IllegalAccessException    If the object cannot be instantiated
+     * @throws InstantiationException    If the object cannot be instantiated
+     * @throws InvocationTargetException If the object cannot be instantiated
      */
     @NotNull
     public static <T> Annotaml<T> create(@NotNull File file, @NotNull Class<T> objectClass) throws IOException,
@@ -180,14 +184,15 @@ public class Annotaml<T> {
     protected static <T> T getDefaults(@NotNull Class<T> objectClass) throws InvocationTargetException,
             InstantiationException, IllegalAccessException, IllegalArgumentException {
         // Validate that the object type constructor with zero arguments
-        final Optional<Constructor<?>> constructors = Arrays.stream(objectClass.getConstructors()).filter(
-                constructor -> constructor.getParameterCount() == 0).findFirst();
+        final Optional<Constructor<?>> constructors = Arrays.stream(objectClass.getDeclaredConstructors())
+                .filter(constructor -> constructor.getParameterCount() == 0).findFirst();
         if (constructors.isEmpty()) {
             throw new IllegalArgumentException("Class type must have a zero-argument constructor: " + objectClass.getName());
         }
 
         // Get the constructor
         final Constructor<?> constructor = constructors.get();
+        constructor.setAccessible(true);
 
         // Instantiate an object of the class type to act as the base
         @SuppressWarnings("unchecked") final T defaults = (T) constructor.newInstance();

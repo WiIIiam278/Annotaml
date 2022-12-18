@@ -87,6 +87,9 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
         final Field[] fields = object.getClass().getDeclaredFields();
         int fieldIndex = 0;
         for (final Field field : fields) {
+            // Ensure the field is accessible
+            field.setAccessible(true);
+
             // Ignore fields that are annotated with @YamlIgnored
             if (field.isAnnotationPresent(YamlIgnored.class)) {
                 continue;
@@ -151,6 +154,9 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
         // Iterate through each field
         final Field[] fields = defaults.getClass().getDeclaredFields();
         for (final Field field : fields) {
+            // Ensure the field is accessible
+            field.setAccessible(true);
+
             // Ignore fields that are annotated with @YamlIgnored
             if (field.isAnnotationPresent(YamlIgnored.class)) {
                 continue;
@@ -198,8 +204,8 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
      * @throws IllegalAccessException If the field could not be accessed
      */
     @SuppressWarnings("unchecked")
-    private <Y> void writeFieldValue(@NotNull Field field, @NotNull T object, @NotNull Y value) throws
-            IllegalAccessException, IllegalArgumentException {
+    private <Y> void writeFieldValue(@NotNull Field field, @NotNull T object, @NotNull Y value)
+            throws IllegalAccessException, IllegalArgumentException {
         // Set the field to be accessible
         field.setAccessible(true);
 
@@ -274,6 +280,7 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
      * Write the map of field paths to values to disk
      *
      * @param file The file to write to
+     * @throws IOException If the file could not be written to
      */
     public void save(@NotNull File file) throws IOException {
         // Create parent directories

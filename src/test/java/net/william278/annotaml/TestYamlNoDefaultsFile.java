@@ -10,6 +10,6 @@ public class TestYamlNoDefaultsFile {
     public boolean value3;
     public Map<String, String> value4;
 
-    public TestYamlNoDefaultsFile() {
+    private TestYamlNoDefaultsFile() {
     }
 }
