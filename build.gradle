@@ -1,11 +1,13 @@
 plugins {
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
-    id 'java'
+    id 'org.cadixdev.licenser' version '0.6.1'
+    id 'org.ajoberstar.grgit' version '5.2.0'
     id 'maven-publish'
+    id 'java'
 }
 
 group 'net.william278'
-version '2.0.1'
+version "2.0.2${versionMetadata()}"
+defaultTasks 'licenseFormat', 'build'
 
 repositories {
     mavenCentral()
@@ -22,22 +24,99 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
 }
 
+logger.lifecycle("Building Annotaml ${version} by William278")
+version rootProject.version
+archivesBaseName = "${rootProject.name}"
+
+tasks {
+    compileJava {
+        options.encoding = 'UTF-8'
+        options.release.set(11)
+    }
+    jar {
+        manifest {
+            attributes('Automatic-Module-Name': 'net.william278.annotaml')
+        }
+    }
+}
+
+
+license {
+    header = rootProject.file('HEADER')
+    include '**/*.java'
+    newLine = true
+}
+
+javadoc {
+    options.encoding = 'UTF-8'
+    options.addStringOption('Xdoclint:none', '-quiet')
+}
+
 java {
     withSourcesJar()
     withJavadocJar()
 }
 
-publishing {
-    publications {
-        shadow(MavenPublication) { publication ->
-            from components.java
-        }
-    }
-    repositories {
-        mavenLocal()
-    }
-}
+jar.dependsOn(sourcesJar)
+jar.dependsOn(javadocJar)
 
 test {
     useJUnitPlatform()
+}
+
+publishing {
+    repositories {
+        if (System.getenv("RELEASES_MAVEN_USERNAME") != null) {
+            maven {
+                name = "william278-releases"
+                url = "https://repo.william278.net/releases"
+                credentials {
+                    username = System.getenv("RELEASES_MAVEN_USERNAME")
+                    password = System.getenv("RELEASES_MAVEN_PASSWORD")
+                }
+                authentication {
+                    basic(BasicAuthentication)
+                }
+            }
+        }
+        if (System.getenv("SNAPSHOTS_MAVEN_USERNAME") != null) {
+            maven {
+                name = "william278-snapshots"
+                url = "https://repo.william278.net/snapshots"
+                credentials {
+                    username = System.getenv("SNAPSHOTS_MAVEN_USERNAME")
+                    password = System.getenv("SNAPSHOTS_MAVEN_PASSWORD")
+                }
+                authentication {
+                    basic(BasicAuthentication)
+                }
+            }
+        }
+
+        publications {
+            mavenJava(MavenPublication) {
+                groupId = 'net.william278'
+                artifactId = 'annotaml'
+                version = "$rootProject.version"
+                artifact jar
+                artifact javadocJar
+                artifact sourcesJar
+            }
+        }
+    }
+}
+
+@SuppressWarnings('GrMethodMayBeStatic')
+def versionMetadata() {
+    // Get if there is a tag for this commit
+    def tag = grgit.tag.list().find { it.commit.id == grgit.head().id }
+    if (tag != null) {
+        return ''
+    }
+
+    // Otherwise, get the last commit hash and if it's a clean head
+    if (grgit == null) {
+        return '-' + System.getenv("GITHUB_RUN_NUMBER") ? 'build.' + System.getenv("GITHUB_RUN_NUMBER") : 'unknown'
+    }
+    return '-' + grgit.head().abbreviatedId + (grgit.status().clean ? '' : '-indev')
 }
