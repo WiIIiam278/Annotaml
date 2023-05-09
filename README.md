@@ -1,6 +1,6 @@
 # Annotaml
 [![Discord](https://img.shields.io/discord/818135932103557162?color=7289da&logo=discord)](https://discord.gg/tVYhJfyDWG)
-[![Maven](https://repo.william278.net/api/badge/latest/releases/net/william278/annotaml?color=00fb9a&name=Maven&prefix=v)
+[![Maven](https://repo.william278.net/api/badge/latest/releases/net/william278/annotaml?color=00fb9a&name=Maven&prefix=v)](https://repo.william278.net/#/releases/net/william278/annotaml/)
 
 **Annotaml** is a library for generating YAML files from Java classes. It uses SnakeYAML for parsing and saving YAML files, providing an extremely easy and intuitive way of reading and writing yaml (configuration) files to objects through a set of Java annotations.
 
