@@ -10,6 +10,7 @@ test3:
 test4: 4.0
 test_5: 5.0
 testEnum: TEST2
+testCasedEnum: Test3
 test6:
   TEST: test
   TEST3: test3
