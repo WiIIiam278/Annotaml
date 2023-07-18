@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'net.william278'
-version "2.0.2${versionMetadata()}"
+version "2.0.3${versionMetadata()}"
 defaultTasks 'licenseFormat', 'build'
 
 repositories {
@@ -14,14 +14,14 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'org.jetbrains:annotations:23.0.0'
+    compileOnly 'org.jetbrains:annotations:24.0.1'
     compileOnly 'dev.dejvokep:boosted-yaml:1.3'
-    compileOnly 'org.snakeyaml:snakeyaml-engine:2.4'
+    compileOnly 'org.snakeyaml:snakeyaml-engine:2.6'
 
     testImplementation 'dev.dejvokep:boosted-yaml:1.3'
-    testImplementation 'org.snakeyaml:snakeyaml-engine:2.4'
+    testImplementation 'org.snakeyaml:snakeyaml-engine:2.6'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.3'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.3'
 }
 
 logger.lifecycle("Building Annotaml ${version} by William278")

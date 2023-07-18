@@ -50,6 +50,7 @@ public class AnnotamlTests {
             Assertions.assertEquals(3, readFile.test6.size());
             Assertions.assertEquals(3, readFile.test7.size());
             Assertions.assertEquals("three", readFile.test7.get("test3"));
+            Assertions.assertEquals(readFile.testCasedEnum, TestYamlFile.TestEnum.TEST3);
         } catch (IOException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
