@@ -153,7 +153,7 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
                 this.put(key, value.orElse(null));
             } catch (IllegalAccessException e) {
                 throw new IllegalArgumentException("Unable to read field " + field.getName() + " from object " +
-                                                   object.getClass().getName() + " to map at YAML path " + field.getName(), e);
+                        object.getClass().getName() + " to map at YAML path " + field.getName(), e);
             }
 
             fieldIndex++;
@@ -185,7 +185,7 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
             if (rootedMap) {
                 if (!field.getType().equals(Map.class)) {
                     throw new IllegalArgumentException("Field " + field.getName() + " is part of a rooted map but is not a Map (is "
-                                                       + field.getType().getName() + ")");
+                            + field.getType().getName() + ")");
                 }
 
                 // Write the rooted map to the field
@@ -193,7 +193,7 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
                     writeFieldValue(field, defaults, this);
                 } catch (IllegalAccessException e) {
                     throw new IllegalArgumentException("Unable to write rooted field " + field.getName() + " from object " +
-                                                       defaults.getClass().getName() + " to " + field.getName(), e);
+                            defaults.getClass().getName() + " to " + field.getName(), e);
                 }
                 return defaults;
             }
@@ -206,7 +206,7 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
                     writeFieldValue(field, defaults, value);
                 } catch (IllegalAccessException e) {
                     throw new IllegalArgumentException("Unable to write field " + field.getName() + " from object " +
-                                                       defaults.getClass().getName() + " to YAML path " + field.getName(), e);
+                            defaults.getClass().getName() + " to YAML path " + field.getName(), e);
                 }
             });
 
@@ -222,7 +222,7 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
      * @param value  The value to set the field to
      * @throws IllegalAccessException If the field could not be accessed
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private <Y> void writeFieldValue(@NotNull Field field, @NotNull T object, @NotNull Y value)
             throws IllegalAccessException, IllegalArgumentException {
         // Set the field to be accessible
@@ -242,8 +242,19 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
             settableObject = ((Section) value).getStringRouteMappedValues(false);
         }
 
+        // Handle enums
         if (fieldClass.isEnum()) {
-            settableObject = Enum.valueOf((Class<? extends Enum>) fieldClass, value.toString());
+            try {
+                settableObject = Enum.valueOf((Class<? extends Enum>) fieldClass, value.toString());
+            } catch (IllegalArgumentException e) {
+                // If the config entered enum wasn't found, try to match it
+                for (final Enum<?> enumValue : ((Class<? extends Enum>) fieldClass).getEnumConstants()) {
+                    if (enumValue.name().equalsIgnoreCase(value.toString())) {
+                        settableObject = enumValue;
+                        break;
+                    }
+                }
+            }
         }
 
         // Set the field value
@@ -251,7 +262,7 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
             field.set(object, settableObject);
         } else {
             throw new IllegalArgumentException("Unable to set field " + field.getName() + " of type " +
-                                               fieldClass.getName() + " to value " + value);
+                    fieldClass.getName() + " to value " + value);
         }
     }
 
