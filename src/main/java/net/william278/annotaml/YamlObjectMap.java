@@ -29,10 +29,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import static dev.dejvokep.boostedyaml.utils.conversion.PrimitiveConversions.*;
@@ -239,7 +237,17 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
 
         // Handle maps
         if (value instanceof Section) {
-            settableObject = ((Section) value).getStringRouteMappedValues(false);
+            final Map<String, ?> map = ((Section) value).getStringRouteMappedValues(false);
+            settableObject = map;
+            if (fieldClass == TreeMap.class) {
+                settableObject = new TreeMap<>(map);
+            } else if (fieldClass == LinkedHashMap.class) {
+                settableObject = new LinkedHashMap<>(map);
+            } else if (fieldClass == HashMap.class) {
+                settableObject = new HashMap<>(map);
+            } else if (fieldClass == ConcurrentHashMap.class) {
+                settableObject = new ConcurrentHashMap<>(map);
+            }
         }
 
         // Handle enums

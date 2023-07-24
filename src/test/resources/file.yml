@@ -19,6 +19,10 @@ test7:
   test: value
   test2: value2
   test3: three
+test8:
+  test: value
+  test2: value2
+  test3: three
 list:
 - test
 - test2

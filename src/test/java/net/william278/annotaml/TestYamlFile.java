@@ -21,6 +21,7 @@ package net.william278.annotaml;
 
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 @SuppressWarnings("unused")
 @YamlFile(header = "Hello, world! \nTest header comment!\nThird line")
@@ -46,6 +47,11 @@ public class TestYamlFile {
             "test3", "value3",
             "test4", "value4",
             "test5", "value5");
+    public TreeMap<String, String> test8 = new TreeMap<>(Map.of("test", "value",
+            "test2", "value2",
+            "test3", "value3",
+            "test4", "value4",
+            "test5", "value5"));
     public List<String> list = List.of("test", "test2", "test3");
 
     public TestYamlFile() {
