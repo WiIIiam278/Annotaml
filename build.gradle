@@ -101,7 +101,7 @@ publishing {
                 groupId = 'net.william278'
                 artifactId = 'annotaml'
                 version = "$rootProject.version"
-                artifact jar
+                artifact shadowJar
                 artifact javadocJar
                 artifact sourcesJar
             }
