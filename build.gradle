@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'net.william278'
-version "2.0.6${versionMetadata()}"
+version "2.0.7${versionMetadata()}"
 defaultTasks 'licenseFormat', 'build'
 
 repositories {
