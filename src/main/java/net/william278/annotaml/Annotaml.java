@@ -19,6 +19,7 @@
 
 package net.william278.annotaml;
 
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -200,6 +201,7 @@ public class Annotaml<T> {
      * @throws IllegalAccessException    If the underlying constructor is inaccessible
      * @throws IllegalArgumentException  If the object does not contain a zero-argument constructor
      */
+    @ApiStatus.Internal
     protected static <T> T getDefaults(@NotNull Class<T> objectClass) throws InvocationTargetException,
             InstantiationException, IllegalAccessException, IllegalArgumentException {
         // Validate that the object type constructor with zero arguments

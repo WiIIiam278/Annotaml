@@ -22,6 +22,7 @@ package net.william278.annotaml;
 import dev.dejvokep.boostedyaml.YamlDocument;
 import dev.dejvokep.boostedyaml.block.implementation.Section;
 import dev.dejvokep.boostedyaml.utils.conversion.PrimitiveConversions;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -40,6 +41,7 @@ import static dev.dejvokep.boostedyaml.utils.conversion.PrimitiveConversions.*;
  *
  * @param <T> The type of object this map is representing
  */
+@ApiStatus.Internal
 public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
 
     /**
@@ -57,6 +59,7 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
      * @param object The object to create a YamlObjectMap from
      * @throws IllegalArgumentException If the object is not annotated with {@link YamlFile}
      */
+    @ApiStatus.Internal
     @SuppressWarnings("unchecked")
     protected YamlObjectMap(@NotNull T object) throws IllegalArgumentException {
         super();
@@ -82,6 +85,7 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
      * @throws IllegalArgumentException If the object type is not annotated with {@link YamlFile}
      * @throws IOException              If an error occurs while reading the YAML
      */
+    @ApiStatus.Internal
     protected static <T> YamlObjectMap<T> parse(@NotNull T defaults, @NotNull InputStream yaml) throws
             IllegalArgumentException, IOException {
         return new YamlObjectMap<>(defaults).readFromYaml(YamlDocument.create(yaml));
@@ -320,6 +324,7 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
      * @param file The file to write to
      * @throws IOException If the file could not be written to
      */
+    @ApiStatus.Internal
     public void save(@NotNull File file) throws IOException {
         // Create parent directories
         if (!file.getParentFile().exists()) {
@@ -364,6 +369,7 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
      * @throws InstantiationException    If the object could not be instantiated
      * @throws IllegalAccessException    If the object could not be instantiated
      */
+    @ApiStatus.Internal
     @NotNull
     protected T getObject() throws InvocationTargetException, InstantiationException, IllegalAccessException {
         return this.applyMapTo(Annotaml.getDefaults(objectClass));
@@ -374,6 +380,7 @@ public class YamlObjectMap<T> extends LinkedHashMap<String, Object> {
      *
      * @return The object represented by this map
      */
+    @ApiStatus.Internal
     @NotNull
     protected Class<T> getObjectClass() {
         return this.objectClass;
