@@ -20,7 +20,7 @@ repositories {
 }
 ```
 
-Then, add the dependency itself. Replace `VERSION` with the latest release version. (e.g. `2.0.5`). If you want to target pre-release "snapshot" versions (not recommended), you should use the `/snapshots` repository instead.
+Then, add the dependency itself. Replace `VERSION` with the latest release version. (e.g. `2.0.6`). If you want to target pre-release "snapshot" versions (not recommended), you should use the `/snapshots` repository instead.
 
 ```groovy
 dependencies {
