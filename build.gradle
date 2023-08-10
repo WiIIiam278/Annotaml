@@ -32,6 +32,8 @@ tasks {
         options.release.set(11)
     }
     jar {
+        enabled = false
+        dependsOn(shadowJar { archiveClassifier = null })
         manifest {
             attributes('Automatic-Module-Name': 'net.william278.annotaml')
         }
@@ -49,7 +51,6 @@ logger.lifecycle("Building Annotaml ${version} by William278")
 version rootProject.version
 archivesBaseName = "${rootProject.name}"
 
-jar.dependsOn shadowJar
 clean.delete "$rootDir/build"
 
 javadoc {
@@ -100,7 +101,7 @@ publishing {
                 groupId = 'net.william278'
                 artifactId = 'annotaml'
                 version = "$rootProject.version"
-                artifact shadowJar
+                artifact jar
                 artifact javadocJar
                 artifact sourcesJar
             }
