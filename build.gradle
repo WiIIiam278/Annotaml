@@ -1,4 +1,5 @@
 plugins {
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'org.cadixdev.licenser' version '0.6.1'
     id 'org.ajoberstar.grgit' version '5.2.0'
     id 'maven-publish'
@@ -6,7 +7,7 @@ plugins {
 }
 
 group 'net.william278'
-version "2.0.5${versionMetadata()}"
+version "2.0.6${versionMetadata()}"
 defaultTasks 'licenseFormat', 'build'
 
 repositories {
@@ -15,18 +16,15 @@ repositories {
 
 dependencies {
     compileOnly 'org.jetbrains:annotations:24.0.1'
-    compileOnly 'dev.dejvokep:boosted-yaml:1.3.1'
     compileOnly 'org.snakeyaml:snakeyaml-engine:2.6'
+
+    implementation 'dev.dejvokep:boosted-yaml:1.3.1'
 
     testImplementation 'dev.dejvokep:boosted-yaml:1.3.1'
     testImplementation 'org.snakeyaml:snakeyaml-engine:2.6'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
 }
-
-logger.lifecycle("Building Annotaml ${version} by William278")
-version rootProject.version
-archivesBaseName = "${rootProject.name}"
 
 tasks {
     compileJava {
@@ -47,6 +45,13 @@ license {
     newLine = true
 }
 
+logger.lifecycle("Building Annotaml ${version} by William278")
+version rootProject.version
+archivesBaseName = "${rootProject.name}"
+
+jar.dependsOn shadowJar
+clean.delete "$rootDir/build"
+
 javadoc {
     options.encoding = 'UTF-8'
     options.addStringOption('Xdoclint:none', '-quiet')
@@ -56,9 +61,6 @@ java {
     withSourcesJar()
     withJavadocJar()
 }
-
-jar.dependsOn(sourcesJar)
-jar.dependsOn(javadocJar)
 
 test {
     useJUnitPlatform()
@@ -98,7 +100,7 @@ publishing {
                 groupId = 'net.william278'
                 artifactId = 'annotaml'
                 version = "$rootProject.version"
-                artifact jar
+                artifact shadowJar
                 artifact javadocJar
                 artifact sourcesJar
             }
