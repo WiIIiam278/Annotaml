@@ -5,6 +5,8 @@
 
 **Annotaml** is a library for reading/writing YAML files to/from Java (11+) classes using annotations&mdash;handy for generating simple config files on-the-fly. It's not-so-great great for complex configuration structures, but good enough for [my projects](https://william278.net/).
 
+Internally, this is built atop [dejvokep's boosted-yaml](https://github.com/dejvokep/boosted-yaml); itself built atop SnakeYaml.
+
 ## Setup
 Annotaml is available [on Maven](https://repo.william278.net/#/releases/net/william278/annotaml/). You can browse the Javadocs [here](https://repo.william278.net/javadoc/releases/net/william278/annotaml/latest).
 
@@ -38,7 +40,7 @@ Here's the basic user's manual for working with Annotaml. [Browse the Javadocs](
 Annotaml is designed to make creating a config as thoughtless as possible. First, you'll need to create a config class as such and annotate it with `@YamlConfig`. Note your class must have a zero-args constructor to facilitate instantiation during reflection:
 
 <details>
-<summary>Example `MyConfig` class</summary>
+<summary>Example: MyConfig class</summary>
 
 ```java
 import net.william278.annotaml.annotations.*;
@@ -62,7 +64,7 @@ public class MyConfig {
 
     // Annotate with @YamlKey to change the key used for a member in the YAML file. Use periods (.) to nest keys.
     @YamlKey("custom_key_name")
-    public String customKeyName = "This string will be read/written to the YAML file with the key 'custom_key_name'.";
+    public String customKeyName = "This string will be read/written to the YAML file with the key custom_key_name.";
 
     // You can add comments to the YAML file to help document it a bit better. They'll be put above the member.
     @YamlComment("This is a comment above the member.")
@@ -76,8 +78,44 @@ public class MyConfig {
 
 </details>
 
-Calling `new MyConfig()` will now provide us with an instance of the MyConfig object with the default values. We can now
-use this to read/write YAML files.
+This will generate a file that looks like this:
+
+<details>
+<summary>Example: Output config</summary>
+
+```yaml
+myString: Hello, world!
+myInt: 123
+myList:
+  - Hello
+  - world!
+privateString: Private members are supported too!
+custom_key_name: This string will be read/written to the YAML file with the key custom_key_name.
+# This is a comment above the member.
+commentExample: This string will be read/written to the YAML file with a comment above it.
+```
+</details>
+
+You can also specify a header to put at the top of the file by setting the "header" annotation parameter of `@YamlFile`:
+
+<details>
+<summary>Example: Config headers</summary>
+
+```java
+@YamlFile(header = "This is a header!")
+public class MyConfig {
+    // ...
+}
+```
+
+Which will add the following to the top of the file:
+
+```yaml
+# This is a header!
+```
+</details>
+
+Calling `new MyConfig()` will now provide us with an instance of the MyConfig object with the default values. We can now use this to read/write YAML files.
 
 ### The Annotaml wrapper
 The Annotaml class provides a wrapper over `@YamlFile`-annotated objects.
@@ -160,6 +198,9 @@ public class AppClass {
 }
 ```
 </details>
+
+### Further examples
+Have a look at the [unit tests](https://github.com/WiIIiam278/Annotaml/tree/master/src/test), which demonstrate (and test) Annotaml's various functionality.
 
 ## License
 Annotaml is licensed under Apache-2.0. See [LICENSE](https://github.com/WiIIiam278/Annotaml/raw/master/LICENSE) for more information.
